@@ -11,10 +11,10 @@ from tkinter import *
 ####################################
 def init(data):
     data.mode = 'splashScreen'
-    data.background = PhotoImage(file = 'mathstats.gif')
-    data.functionsBackground = PhotoImage(file = 'Functions.gif')
-    data.fractionsBackground = PhotoImage(file = 'f.gif')
-    data.piBackground = PhotoImage(file = 'PI.gif')
+    data.background = PhotoImage(file = 'images/mathstats.gif')
+    data.functionsBackground = PhotoImage(file = 'images/Functions.gif')
+    data.fractionsBackground = PhotoImage(file = 'images/f.gif')
+    data.piBackground = PhotoImage(file = 'images/PI.gif')
 
 def mousePressed(event, data):
     pass
