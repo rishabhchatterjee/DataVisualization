@@ -8,7 +8,7 @@ class Equation(object):
         self.degree = int(degree)
         self.mode = mode
         self.digits = digits
-        coeffs = ['a','b','c','d','e','f','g','h','j','i']
+        coeffs = ['a','b','c','d','e','f','g','h','i','j']
         self.constant = int(input('Input constant term\n'))
         if(self.degree == 1):
             self.a = int(input('Input coefficient of x\n'))
@@ -30,6 +30,51 @@ class Equation(object):
             self.c = int(input('Input coefficient of x^3\n'))
             self.d = int(input('Input coefficient of x^2\n'))
             self.e = int(input('Input coefficient of x\n'))
+        elif(self.degree == 6):
+            self.a = int(input('Input coefficient of x^6\n'))
+            self.b = int(input('Input coefficient of x^5\n'))
+            self.c = int(input('Input coefficient of x^4\n'))
+            self.d = int(input('Input coefficient of x^3\n'))
+            self.e = int(input('Input coefficient of x^2\n'))
+            self.f = int(input('Input coefficient of x\n'))
+        elif(self.degree == 7):
+            self.a = int(input('Input coefficient of x^7\n'))
+            self.b = int(input('Input coefficient of x^6\n'))
+            self.c = int(input('Input coefficient of x^5\n'))
+            self.d = int(input('Input coefficient of x^4\n'))
+            self.e = int(input('Input coefficient of x^3\n'))
+            self.f = int(input('Input coefficient of x^2\n'))
+            self.g = int(input('Input coefficient of x\n'))
+        elif(self.degree == 8):
+            self.a = int(input('Input coefficient of x^8\n'))
+            self.b = int(input('Input coefficient of x^7\n'))
+            self.c = int(input('Input coefficient of x^6\n'))
+            self.d = int(input('Input coefficient of x^5\n'))
+            self.e = int(input('Input coefficient of x^4\n'))
+            self.f = int(input('Input coefficient of x^3\n'))
+            self.g = int(input('Input coefficient of x^2\n'))
+            self.h = int(input('Input coefficient of x\n'))
+        elif(self.degree == 9):
+            self.a = int(input('Input coefficient of x^9\n'))
+            self.b = int(input('Input coefficient of x^8\n'))
+            self.c = int(input('Input coefficient of x^7\n'))
+            self.d = int(input('Input coefficient of x^6\n'))
+            self.e = int(input('Input coefficient of x^5\n'))
+            self.f = int(input('Input coefficient of x^4\n'))
+            self.g = int(input('Input coefficient of x^3\n'))
+            self.h = int(input('Input coefficient of x^2\n'))
+            self.i = int(input('Input coefficient of x\n'))
+        elif(self.degree == 10):
+            self.a = int(input('Input coefficient of x^10\n'))
+            self.b = int(input('Input coefficient of x^9\n'))
+            self.c = int(input('Input coefficient of x^8\n'))
+            self.d = int(input('Input coefficient of x^7\n'))
+            self.e = int(input('Input coefficient of x^6\n'))
+            self.f = int(input('Input coefficient of x^5\n'))
+            self.g = int(input('Input coefficient of x^4\n'))
+            self.h = int(input('Input coefficient of x^3\n'))
+            self.i = int(input('Input coefficient of x^2\n'))
+            self.j = int(input('Input coefficient of x\n'))
 
     def __repr__(self):
         if(self.degree == 1):
@@ -42,6 +87,16 @@ class Equation(object):
             return  '%dx^4 + %dx^3 + %dx^2 + %dx + %d' %(self.a, self.b, self.c, self.d, self.constant)
         elif(self.degree == 5):
             return '%dx^5 + %dx^4 + %dx^3 + %dx^2 + %dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.constant)
+        elif(self.degree == 6):
+            return '%dx^6 + %dx^5 + %dx^4 + %dx^3 + %dx^2 +%dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.f, self.constant)
+        elif(self.degree == 7):
+            return '%dx^7 + %dx^6 + %dx^5 + %dx^4 + %dx^3 + %dx^2 +%dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.constant)
+        elif(self.degree == 8):
+            return '%dx^8 + %dx^7 + %dx^6 + %dx^5 + %dx^4 + %dx^3 + %dx^2 +%dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.h, self.constant)
+        elif(self.degree == 9):
+            return '%dx^9 + %dx^8 + %dx^7 + %dx^6 + %dx^5 + %dx^4 + %dx^3 + %dx^2 +%dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.h, self.i, self.constant)
+        elif(self.degree == 10):
+            return '%dx^10 + %dx^9 + %dx^8 + %dx^7 + %dx^6 + %dx^5 + %dx^4 + %dx^3 + %dx^2 +%dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.h, self.i, self.j, self.constant)
 
     def findValuesFunctions(self, f, digits = 10, mode = 'n', count = 0, ans = []):
         if(count >= int(digits)):
@@ -86,7 +141,26 @@ class Equation(object):
             def f(x):
                 return self.a*x**5 + self.b*x**4 + self.c*x**3 + self.d*x**2 + self.e*x + self.constant
             return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
-
+        elif(self.degree == 6):
+            def f(x):
+                return self.a*x**6 + self.b*x**5 + self.c*x**4 + self.d*x**3 + self.e*x**2 + self.f*x + self.constant
+            return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
+        elif(self.degree == 7):
+            def f(x):
+                return self.a*x**7 + self.b*x**6 + self.c*x**5 + self.d*x**4 + self.e*x**3 + self.f*x**2 + self.g*x + self.constant
+            return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
+        elif(self.degree == 8):
+            def f(x):
+                return self.a*x**8 + self.b*x**7 + self.c*x**6 + self.d*x**5 + self.e*x**4 + self.f*x**3 + self.g*x**2 + self.h*x + self.constant
+            return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
+        elif(self.degree == 9):
+            def f(x):
+                return self.a*x**9 + self.b*x**8 + self.c*x**7 + self.d*x**6 + self.e*x**5 + self.f*x**4 + self.g*x**3 + self.h*x**2 + self.i*x + self.constant
+            return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
+        elif(self.degree == 10):
+            def f(x):
+                return self.a*x**10 + self.b*x**9 + self.c*x**8 + self.d*x**7 + self.e*x**6 + self.f*x**5 + self.g*x**4 + self.h*3 + self.i*x**2 + self.j*x + self.constant
+            return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
 # degree = input('Input degree of polynomial (upto and including 5)\n')
 # A = Equation(degree, 'm', 1)
 # print(A, '\n\n',A.makeFunction())

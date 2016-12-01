@@ -11,12 +11,19 @@ def getInputs():
 class Fraction(object):
 
     def __init__(self):
-        self.num = int(input('Enter numerator of fraction\n'))
-        self.den = int(input('\nEnter denominator of fraction\n'))
-        
-        while(self.den == 0):
+        self.num = (input('\nEnter numerator of fraction\n'))
+        for digit in self.num:
+            if digit not in '0123456789':
+                self.num = input('\nEnter valid integer please!\n')
+        self.den = (input('\nEnter denominator of fraction\n'))
+        for digit in self.den:
+            if digit not in '0123456789':
+                self.den = input('\nEnter valid integer please!\n')
+        while(self.den == '0'):
             self.den = int(input("\nPlease Enter non 0 denominator\n"))
-
+        
+        self.num = int(self.num)
+        self.den = int(self.den)
         self.digits = int(input('\nEnter number of decimal places\n'))
 
     def __repr__(self):
