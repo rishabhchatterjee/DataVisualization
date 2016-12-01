@@ -8,7 +8,7 @@ def functionsNormal(mode = 'n'):
     A = Equation(degree, mode, digits)
     drawingList = A.makeFunction()
     print('\nEquation entered is y = ', A, '\n')
-    #print(drawingList)
+    print(drawingList)
     return drawingList
 
 #print(functionsNormal('n'))

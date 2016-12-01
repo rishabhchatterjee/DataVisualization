@@ -15,11 +15,50 @@ def init(data):
     data.functionsBackground = PhotoImage(file = 'images/Functions.gif')
     data.fractionsBackground = PhotoImage(file = 'images/f.gif')
     data.piBackground = PhotoImage(file = 'images/PI.gif')
+    data.functionsPageLoaded = False
 
 def mousePressed(event, data):
-    pass
+    (x,y) = (event.x, event.y)
+
+    if(data.width - 100 <= x <= data.width - 50 and 50 <= y <= 100):
+        data.mode = 'splashScreen'
+
+    if(data.mode == 'splashScreen'):
+        if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
+            data.mode = 'functions'
+        if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 10 <= y <= data.height//2 + 50):
+            data.mode = 'fractions'
+        if(data.width//2 - 137.5 <= x <= data.width//2 + 137.5 and data.height//2 + 100 <= y <= data.height//2 + 160):
+            data.mode = 'pi'
+
+    if(data.mode == 'functions'):
+        if(data.functionsPageLoaded == True):
+            if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
+                drawingList = functionsNormal('n')
+                draw(drawingList)
+            if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 10 <= y <= data.height//2 + 50):
+                drawingList = functionsNormal('m')
+                draw(drawingList) 
+
+    if(data.mode == 'fractions'):
+        if(data.width//2 - 100 <= x <= data.width//2 + 100 and data.height//2 - 100 <= y <= data.height//2 + 100):
+            drawingList = getInputs()
+            draw(drawingList)
+
+    if(data.mode == 'pi'):
+        if(data.width//3 - 200 <= x <= data.width//3 + 75 and data.height//3 <= y <= data.height//3 + 60):
+            drawingList = piDigitsList('c')
+            draw(drawingList)
+
+        if(data.width//3 + 200 <= x <= data.width//3 + 475 and data.height//3 <= y <= data.height//3 + 60):
+            drawingList = piDigitsList('r')
+            draw(drawingList)
 
 def keyPressed(event, data):
+    if(event.keysym == 'h'):
+        data.mode = 'splashScreen'
+        data.functionsPageLoaded = False
+
     if(data.mode == 'splashScreen'):
         if(event.keysym == 'f'):
             data.mode = 'functions'
@@ -50,28 +89,52 @@ def keyPressed(event, data):
         if(event.keysym == 'r'):
             drawingList = piDigitsList('r')
             draw(drawingList)
+
 def timerFired(data):
     pass
 
 def redrawAll(canvas, data):
     canvas.create_image(400,400, image = data.background)
+    canvas.create_rectangle(data.width - 100, 50, data.width - 50, 100, fill = 'yellow', width = 0)
+    canvas.create_polygon(data.width - 110, 50, data.width - 40, 50, data.width - 75, 15, fill = 'dark green', width = 0)
+    canvas.create_rectangle(data.width - 90, 60, data.width - 80, 70)
+    canvas.create_rectangle(data.width - 70, 60, data.width - 60, 70)
+    canvas.create_text(data.width - 75, 90, text = 'HOME', font = 'Arial 10 bold', fill = 'red')
 
     if(data.mode == 'splashScreen'):
         canvas.create_text(data.width//2, data.height//4 + 25, 
                                 text = "Welcome to Data Visualization",
                                     font = "Arial 26 bold")
-        canvas.create_text(data.width//2, data.height//2, 
-                            text = 'Press \'f\' for function mode\n\nPress \'q\' for fraction mode\n\nPress \'p\' for Pi mode',
-                                font = "Arial 24 bold")
-         
+
+        canvas.create_rectangle(data.width//2 - 300, data.height//2 - 10, data.width//2 - 25, data.height//2 + 50)
+        canvas.create_text(data.width//2 - 170, data.height//2 + 20, text = "Functions", font = "Arial 20 bold", fill = 'red')
+
+        canvas.create_rectangle(data.width//2 + 25, data.height//2 - 10, data.width//2 + 300, data.height//2 + 50)
+        canvas.create_text(data.width//2 + 170, data.height//2 + 20, text = "Fractions", font = "Arial 20 bold", fill = 'red')
+
+        canvas.create_rectangle(data.width//2 - 137.5, data.height//2 + 100, data.width//2 + 137.5, data.height//2 + 160)
+        canvas.create_text(data.width//2, data.height//2 + 130, text = "PI <3", font = "Arial 20 bold", fill = 'red')
+
     if(data.mode == 'functions'):
         canvas.create_image(400,275, image = data.functionsBackground)
         canvas.create_text(data.width//2, data.height//4, 
                                 text = "Let us visualize functions!",
                                     font = "Arial 26 bold")
-        canvas.create_text(data.width//2, data.height//2, 
-                    text = 'Press \'n\' for number mode\n\nPress \'m\' for modular arithmetic mode',
-                        font = "Arial 24 bold") 
+
+        canvas.create_rectangle(data.width//2 - 300, data.height//2 - 10, data.width//2 - 25, data.height//2 + 50)
+        canvas.create_text(data.width//2 - 170, data.height//2 + 20, text = "Normal Mode", font = "Arial 20 bold", fill = 'red')
+
+        canvas.create_rectangle(data.width//2 + 25, data.height//2 - 10, data.width//2 + 300, data.height//2 + 50)
+        canvas.create_text(data.width//2 + 170, data.height//2 + 20, text = "Modular Arithmetic Mode", font = "Arial 20 bold", fill = 'red')
+
+        canvas.create_text(data.width//2, data.height - 250, 
+            text = 'Normal Mode : In this mode the values of the function \nis evaluated and each digit (if value >= 10) is visualized\n',
+                font = 'Arial 20 bold', fill = 'blue')
+        canvas.create_text(data.width//2, data.height - 200, 
+            text = 'Modular Arithemtic Mode : In this mode the values of the function \nis evaluated and the one\'s digit (found by mod 10) is visualized',
+                font = 'Arial 20 bold', fill = 'blue')
+        
+        data.functionsPageLoaded = True
 
     if(data.mode == 'fractions'):
         canvas.create_image(400,400, image = data.fractionsBackground)
@@ -79,21 +142,25 @@ def redrawAll(canvas, data):
                                 text = "Let us visualize fractions!",
                                     font = " Arial 24 bold")
         canvas.create_text(data.width//2, data.height//4 + 35,
-                                text = "Press Space to start!",
+                                text = "Click the fraction to start!",
                                     font = " Arial 24 bold")
+        #canvas.create_rectangle(data.width//2 - 100, data.height//2 - 100, data.width//2 + 100, data.height//2 + 100)
+
     if(data.mode == 'pi'):
         canvas.create_image(400,500, image = data.piBackground)
         canvas.create_text(data.width//2, data.height//5,
                                 text = "Let us visualize Pi!",
                                     font = " Arial 24 bold")
-        canvas.create_text(data.width//2, data.height//3, 
-                    text = 'Press \'c\' for Chudnovsky Algorithm\n\nPress \'r\' for recursive algorithm (Error ~10^-7)',
-                        font = "Arial 24 bold") 
 
+        canvas.create_rectangle(data.width//3 - 200, data.height//3, data.width//3 + 75, data.height//3 + 60)
+        canvas.create_text(data.width//3 - 62.5, data.height//3 + 30, text = 'Chudnovsky Algorithm',
+                                font= 'Arial 20 bold', fill = 'red')
+
+        canvas.create_rectangle(data.width//3 + 200, data.height//3, data.width//3 + 475, data.height//3 + 60)
+        canvas.create_text(data.width//3 + 337.5, data.height//3 + 30, text = 'Recursive Algorithm',
+                                font= 'Arial 20 bold', fill = 'red')
 
     
-
-
 ####################################
 # use the run function as-is
 ####################################

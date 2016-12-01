@@ -17,15 +17,13 @@ def draw(drawingList):
     turtle.penup()
     turtle.pensize(4)
     turtle.color('white')
-    turtle.setpos(-370,250)
-    turtle.write('Data Visualization', font = 'Times 20 bold')
+
 
 
     kosbie = turtle.Turtle()
     kosbie.color('orange')
     kosbie.hideturtle()
     kosbie.penup()
-    print(kosbie.position())
 
 ################################################################################
 #                           MAKE INNER CIRCLES                                 #
