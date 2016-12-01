@@ -13,7 +13,7 @@ This product can be used to teach people. Firstly, it is user-friendly since it 
 Modules I will be using are :
 1) Turtle
 2) PyAudio
-3) Tkinter (maybe)
+3) Tkinter
 
 # Competitive Analysis
 
