@@ -10,6 +10,7 @@ def piDigitsList(mode = 'r'):
     if(mode == 'r'):
         ans = callWithLargeStack(division, 355, 113, digits)
         print(ans)
+        return ans
 
     if(mode == 'c'):
 

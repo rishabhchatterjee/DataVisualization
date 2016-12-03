@@ -98,7 +98,7 @@ def draw(drawingList):
     turtle.penup()
     turtle.setpos(0,-235)
     turtle.color('white')
-    #turtle.hideturtle()
+    turtle.hideturtle()
     for number in numbers:
         turtle.pendown()
         turtle.color(str(numbers[number]))
@@ -223,7 +223,7 @@ def draw(drawingList):
             startPosition = endPosition
             #turtle.right(angleShift)
             drawLines(practiceList,endPosition, i+1)
-
+    print(drawingList)
     drawLines(drawingList, getPosition(drawingList[0]), 0)
 
 #turtle.circle(50, -180)
