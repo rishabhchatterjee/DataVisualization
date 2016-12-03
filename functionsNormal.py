@@ -1,12 +1,12 @@
 from solveEquations import Equation
 #from drawTurtle import setup
-#from tkinter import *
+from tkinter import simpledialog
 
 def functionsNormal(mode = 'n'):
-    degree = input('Input degree of polynomial (upto and including 10)\n')
+    degree = simpledialog.askstring(" ", 'Input degree of polynomial (upto and including 10)')
     while (int(degree) > 10):
-        degree = input('Please input degree of polynomial upto and including 10\n')
-    digits = input('Input maximum \'x\' value of function\n')
+        degree = simpledialog.askstring(" ", 'Please input degree 1 <= 10')
+    digits = simpledialog.askstring(" ", 'Input maximum value of \'x\'')
     A = Equation(degree, mode, digits)
     drawingList = A.makeFunction()
     print('\nEquation entered is y = ', A, '\n')

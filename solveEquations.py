@@ -1,80 +1,84 @@
 import math, string
 from calculateFractions import callWithLargeStack
-#from playingWithTurtle import *
+from tkinter import simpledialog
+"""
+from tkinter import messagebox
 
 
+"""
 class Equation(object):
     def __init__(self, degree, mode = 'n', digits = 100):
         self.degree = int(degree)
         self.mode = mode
         self.digits = digits
         coeffs = ['a','b','c','d','e','f','g','h','i','j']
-        self.constant = int(input('Input constant term\n'))
+        #self.constant = int(input('Input constant term\n'))
+        self.constant = int(simpledialog.askstring(" ",'Input constant term' ))
         if(self.degree == 1):
-            self.a = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 2):
-            self.a = int(input('Input coefficient of x^2\n'))
-            self.b = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 3):
-            self.a = int(input('Input coefficient of x^3\n'))
-            self.b = int(input('Input coefficient of x^2\n'))
-            self.c = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 4):
-            self.a = int(input('Input coefficient of x^4\n'))
-            self.b = int(input('Input coefficient of x^3\n'))
-            self.c = int(input('Input coefficient of x^2\n'))
-            self.d = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 5):
-            self.a = int(input('Input coefficient of x^5\n'))
-            self.b = int(input('Input coefficient of x^4\n'))
-            self.c = int(input('Input coefficient of x^3\n'))
-            self.d = int(input('Input coefficient of x^2\n'))
-            self.e = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^5'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.e = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 6):
-            self.a = int(input('Input coefficient of x^6\n'))
-            self.b = int(input('Input coefficient of x^5\n'))
-            self.c = int(input('Input coefficient of x^4\n'))
-            self.d = int(input('Input coefficient of x^3\n'))
-            self.e = int(input('Input coefficient of x^2\n'))
-            self.f = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^6'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^5'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.e = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.f = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 7):
-            self.a = int(input('Input coefficient of x^7\n'))
-            self.b = int(input('Input coefficient of x^6\n'))
-            self.c = int(input('Input coefficient of x^5\n'))
-            self.d = int(input('Input coefficient of x^4\n'))
-            self.e = int(input('Input coefficient of x^3\n'))
-            self.f = int(input('Input coefficient of x^2\n'))
-            self.g = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^7'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^6'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^5'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.e = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.f = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.g = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 8):
-            self.a = int(input('Input coefficient of x^8\n'))
-            self.b = int(input('Input coefficient of x^7\n'))
-            self.c = int(input('Input coefficient of x^6\n'))
-            self.d = int(input('Input coefficient of x^5\n'))
-            self.e = int(input('Input coefficient of x^4\n'))
-            self.f = int(input('Input coefficient of x^3\n'))
-            self.g = int(input('Input coefficient of x^2\n'))
-            self.h = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^8'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^7'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^6'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x^5'))
+            self.e = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.f = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.g = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.h = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 9):
-            self.a = int(input('Input coefficient of x^9\n'))
-            self.b = int(input('Input coefficient of x^8\n'))
-            self.c = int(input('Input coefficient of x^7\n'))
-            self.d = int(input('Input coefficient of x^6\n'))
-            self.e = int(input('Input coefficient of x^5\n'))
-            self.f = int(input('Input coefficient of x^4\n'))
-            self.g = int(input('Input coefficient of x^3\n'))
-            self.h = int(input('Input coefficient of x^2\n'))
-            self.i = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^9'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^8'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^7'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x^6'))
+            self.e = int(simpledialog.askstring(" ", 'Input coefficient of x^5'))
+            self.f = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.g = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.h = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.i = int(simpledialog.askstring(" ", 'Input coefficient of x'))
         elif(self.degree == 10):
-            self.a = int(input('Input coefficient of x^10\n'))
-            self.b = int(input('Input coefficient of x^9\n'))
-            self.c = int(input('Input coefficient of x^8\n'))
-            self.d = int(input('Input coefficient of x^7\n'))
-            self.e = int(input('Input coefficient of x^6\n'))
-            self.f = int(input('Input coefficient of x^5\n'))
-            self.g = int(input('Input coefficient of x^4\n'))
-            self.h = int(input('Input coefficient of x^3\n'))
-            self.i = int(input('Input coefficient of x^2\n'))
-            self.j = int(input('Input coefficient of x\n'))
+            self.a = int(simpledialog.askstring(" ", 'Input coefficient of x^10'))
+            self.b = int(simpledialog.askstring(" ", 'Input coefficient of x^9'))
+            self.c = int(simpledialog.askstring(" ", 'Input coefficient of x^8'))
+            self.d = int(simpledialog.askstring(" ", 'Input coefficient of x^7'))
+            self.e = int(simpledialog.askstring(" ", 'Input coefficient of x^6'))
+            self.f = int(simpledialog.askstring(" ", 'Input coefficient of x^5'))
+            self.g = int(simpledialog.askstring(" ", 'Input coefficient of x^4'))
+            self.h = int(simpledialog.askstring(" ", 'Input coefficient of x^3'))
+            self.i = int(simpledialog.askstring(" ", 'Input coefficient of x^2'))
+            self.j = int(simpledialog.askstring(" ", 'Input coefficient of x'))
 
     def __repr__(self):
         if(self.degree == 1):

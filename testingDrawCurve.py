@@ -31,24 +31,24 @@ def draw(drawingList):
     kosbie.speed(13)
     turtle.speed(13)
 
-    turtle.setpos(0,-25)
-    turtle.pendown()
-    turtle.begin_fill()
-    turtle.circle(25)
-    turtle.end_fill()
-    turtle.penup()
-    turtle.setpos(0,-50)
-    turtle.pendown()
-    turtle.circle(50)
-    turtle.penup()
-    turtle.setpos(0,-75)
-    turtle.pendown()
-    turtle.circle(75)
-    turtle.penup()
-    # turtle.setpos(0,-300)
+    # turtle.setpos(0,-25)
     # turtle.pendown()
-    # turtle.circle(300)
+    # turtle.begin_fill()
+    # turtle.circle(25)
+    # turtle.end_fill()
     # turtle.penup()
+    # turtle.setpos(0,-50)
+    # turtle.pendown()
+    # turtle.circle(50)
+    # turtle.penup()
+    # turtle.setpos(0,-75)
+    # turtle.pendown()
+    # turtle.circle(75)
+    # turtle.penup()
+    # # turtle.setpos(0,-300)
+    # # turtle.pendown()
+    # # turtle.circle(300)
+    # # turtle.penup()
 
 ################################################################################
 #                             MAKE NUMBER DICT                                 #
@@ -106,7 +106,7 @@ def draw(drawingList):
         turtle.penup()
         turtle.circle(225,36)
 
-    turtle.hideturtle()
+    #turtle.hideturtle()
     turtle.pensize(1)
 
 ################################################################################
@@ -159,7 +159,7 @@ def draw(drawingList):
         yFactor = random.uniform(1.3,1.5)
         return (x*xFactor, y*yFactor)
 
-    startPosition = getPosition(drawingList[0])
+    #startPosition = getPosition(drawingList[0])
 
     def playSound(d):
         if(d == 0): return w0
@@ -173,30 +173,75 @@ def draw(drawingList):
         if(d == 8): return w8
         if(d == 9): return w9
 
+    kosbie.speed(13)
+    turtle.speed(13)
+
+    def kochSide(length, n):
+        if (n == 1):
+            turtle.forward(length)
+            #turtle.goto(ending)
+        else:
+            kochSide(length/3.0, n-1)
+            turtle.left(60)
+            kochSide(length/3.0, n-1)
+            turtle.right(120)
+            kochSide(length/3.0, n-1)
+            turtle.left(60)
+            kochSide(length/3.0, n-1)
+
     def drawLines(practiceList, startPosition, i = 0):
         if(i == len(practiceList) - 1):
             return
         else:
             endPosition = getPosition(practiceList[i+1])
+
+            xStartCenterMid = startPosition[0]/2
+            yStartCenterMid = startPosition[1]/2
+            xEndCenterMid = endPosition[0]/2
+            yEndCenterMid = endPosition[1]/2
+
             color = random.choice(numberColors[practiceList[i]])
             turtle.color(color)
 
             #play('saxSounds/' + str(practiceList[i]) + '.wav')
             #play(playSound(practiceList[i]))
-
+            turtle.penup()
             turtle.setpos(startPosition[0], startPosition[1])
             pos = getDrawingDotPosition(startPosition[0], startPosition[1])
-            kosbie.setpos(pos[0], pos[1])
-            kosbie.color(color)
-            kosbie.begin_fill()
-            kosbie.circle(random.randint(2,5))
-            kosbie.end_fill()
+            kosbie.setpos(pos[0], pos[1])       #
+            kosbie.color(color)                 #  DRAWS THE DOTS
+            kosbie.begin_fill()                 #
+            kosbie.circle(random.randint(2,5))  #
+            kosbie.end_fill()                   #
             #kosbie.write(str(practiceList[i]), font = 'Times 20 bold')
             turtle.pendown()
+
+            turtle.goto(xStartCenterMid, yStartCenterMid)
+            turtle.goto(xEndCenterMid, yEndCenterMid)
             turtle.goto(endPosition[0], endPosition[1])
+
             startPosition = endPosition
+            #turtle.right(angleShift)
             drawLines(practiceList,endPosition, i+1)
 
-    drawLines(drawingList, startPosition, 0)
+    drawLines(drawingList, getPosition(drawingList[0]), 0)
 
-#draw([1,2,3,4])
+#turtle.circle(50, -180)
+
+# draw([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4,
+#  6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1, 6, 9, 3, 9, 
+#  9, 3, 7, 5, 1, 0, 5, 8, 2, 0, 9, 7, 4, 9, 4, 4, 5, 9, 2, 3, 0, 7, 8, 1, 6, 4, 
+#  0, 6, 2, 8, 6, 2, 0, 8, 9, 9, 8, 6, 2, 8, 0, 3, 4, 8, 2, 5, 3, 4, 2, 1, 1, 7, 
+#  0, 6, 7, 9, 8, 2, 1, 4, 8, 0, 8, 6, 5, 1, 3, 2, 8, 2, 3, 0, 6, 6, 4, 7, 0, 9, 
+#  3, 8, 4, 4, 6, 0, 9, 5, 5, 0, 5, 8, 2, 2, 3, 1, 7, 2, 5, 8, 9, 2, 4, 8, 3, 5, 
+#  3, 6, 7, 6, 7, 4, 7, 1, 9, 2, 8, 9, 3, 7, 5, 4, 7, 9, 7, 6, 9, 4, 5, 1, 7, 9, 
+#  1, 5, 7, 1, 2, 7, 1, 7, 4, 3, 8, 2, 9, 5, 2, 8, 8, 5, 2, 2, 6, 4, 0, 4, 0, 1, 
+#  2, 7, 6, 8, 9, 6, 9, 9, 8, 2, 8, 7, 4, 1, 3, 1, 0, 9, 4, 0, 3, 7, 2, 9, 5, 1, 
+#  2, 5, 0, 8, 4, 0, 7, 3, 1, 3, 1, 2, 5, 0, 9, 4, 0, 5, 5, 5, 0, 7, 9, 7, 4, 5, 
+#  9, 6, 9, 7, 7, 3, 8, 0, 0, 0, 6, 2, 4, 3, 7, 9, 1, 4, 3, 4, 0, 1, 7, 6, 1, 9, 
+#  9, 3, 0, 5, 5, 6, 3, 9, 8, 1, 9, 0, 5, 1, 1, 0, 7, 1, 9, 1, 7, 2, 4, 1, 2, 5, 
+#  6, 6, 4, 6, 5, 6, 5, 5, 9, 5, 2, 2, 5, 8, 2, 9, 4, 3, 0, 4, 2, 7, 3, 8, 7, 5, 
+#  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
+#  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
+#   8])
+#draw([1,2,3,4,5,6,7,8,9])

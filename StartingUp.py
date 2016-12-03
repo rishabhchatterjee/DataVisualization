@@ -3,8 +3,10 @@
 from functionsNormal import functionsNormal
 from fractions import *
 from piDigits import *
-from draw import *
+#from draw import *
+from testingDrawCurve import *
 from tkinter import *
+from tkinter import simpledialog
 
 ####################################
 # customize these functions

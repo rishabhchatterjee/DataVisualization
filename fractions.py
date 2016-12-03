@@ -1,5 +1,6 @@
 import string, math
 from calculateFractions import *
+from tkinter import simpledialog
 
 
 def getInputs():
@@ -11,20 +12,20 @@ def getInputs():
 class Fraction(object):
 
     def __init__(self):
-        self.num = (input('\nEnter numerator of fraction\n'))
+        self.num = simpledialog.askstring(" ", 'Enter numerator of fraction')
         for digit in self.num:
             if digit not in '0123456789':
                 self.num = input('\nEnter valid integer please!\n')
-        self.den = (input('\nEnter denominator of fraction\n'))
+        self.den = simpledialog.askstring(" ", 'Enter denominator of fraction')
         for digit in self.den:
             if digit not in '0123456789':
-                self.den = input('\nEnter valid integer please!\n')
+                self.den = simpledialog.askstring(" ", 'Enter valid integer please!')
         while(self.den == '0'):
-            self.den = int(input("\nPlease Enter non 0 denominator\n"))
+            self.den = int(simpledialog.askstring(" ", 'Please Enter non 0 denominator'))
         
         self.num = int(self.num)
         self.den = int(self.den)
-        self.digits = int(input('\nEnter number of decimal places\n'))
+        self.digits = int(simpledialog.askstring(" ", 'Enter number of decimal places'))
 
     def __repr__(self):
         return '\nEntered Fraction is %d / %d' %(self.num, self.den)

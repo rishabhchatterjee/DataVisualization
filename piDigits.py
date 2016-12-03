@@ -2,9 +2,11 @@ import math, random
 from calculateFractions import callWithLargeStack, division
 from math import factorial
 from decimal import Decimal, getcontext
+from tkinter import simpledialog
 
 def piDigitsList(mode = 'r'):
-    digits = int(input("Enter number of decimal places\n"))
+    digits = int(simpledialog.askstring(" ", "Enter number of decimal places"))
+    #digits = int(input("Enter number of decimal places\n"))
     if(mode == 'r'):
         ans = callWithLargeStack(division, 355, 113, digits)
         print(ans)
