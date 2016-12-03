@@ -5,7 +5,6 @@ from playingWithPyAudio import *
 
 
 def draw(drawingList):
-
 ################################################################################
 #                            MAKE HEADINGS ETC                                 #
 ################################################################################
@@ -176,18 +175,6 @@ def draw(drawingList):
     kosbie.speed(13)
     turtle.speed(13)
 
-    def kochSide(length, n):
-        if (n == 1):
-            turtle.forward(length)
-            #turtle.goto(ending)
-        else:
-            kochSide(length/3.0, n-1)
-            turtle.left(60)
-            kochSide(length/3.0, n-1)
-            turtle.right(120)
-            kochSide(length/3.0, n-1)
-            turtle.left(60)
-            kochSide(length/3.0, n-1)
 
     def drawLines(practiceList, startPosition, i = 0):
         if(i == len(practiceList) - 1):
@@ -216,6 +203,8 @@ def draw(drawingList):
             #kosbie.write(str(practiceList[i]), font = 'Times 20 bold')
             turtle.pendown()
 
+            distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
+            #turtle.circle(distance/2, -180)
             turtle.goto(xStartCenterMid, yStartCenterMid)
             turtle.goto(xEndCenterMid, yEndCenterMid)
             turtle.goto(endPosition[0], endPosition[1])
@@ -225,6 +214,8 @@ def draw(drawingList):
             drawLines(practiceList,endPosition, i+1)
     print(drawingList)
     drawLines(drawingList, getPosition(drawingList[0]), 0)
+    turtle.exitonclick()
+    turtle.done()
 
 #turtle.circle(50, -180)
 

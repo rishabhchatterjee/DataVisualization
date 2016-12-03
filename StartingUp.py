@@ -3,10 +3,12 @@
 from functionsNormal import functionsNormal
 from fractions import *
 from piDigits import *
+from testFreeDrawing import *
 #from draw import *
 from testingDrawCurve import *
 from tkinter import *
 from tkinter import simpledialog
+import turtle
 
 ####################################
 # customize these functions
@@ -23,15 +25,18 @@ def mousePressed(event, data):
     (x,y) = (event.x, event.y)
 
     if(data.width - 100 <= x <= data.width - 50 and 50 <= y <= 100):
-        data.mode = 'splashScreen'
+        init(data)
 
     if(data.mode == 'splashScreen'):
         if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
             data.mode = 'functions'
         if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 10 <= y <= data.height//2 + 50):
             data.mode = 'fractions'
-        if(data.width//2 - 137.5 <= x <= data.width//2 + 137.5 and data.height//2 + 100 <= y <= data.height//2 + 160):
+        if(data.width//2 - 300 <= x <= data.width//2 -25 and data.height//2 + 100 <= y <= data.height//2 + 160):
             data.mode = 'pi'
+        # canvas.create_rectangle(data.width//2 + 25, data.height//2 + 100, data.width//2 + 300, data.height//2 + 160)
+        if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 + 100 <= y <= data.height//2 + 160):
+            data.mode = 'freeDraw'
 
     if(data.mode == 'functions'):
         if(data.functionsPageLoaded == True):
@@ -56,6 +61,11 @@ def mousePressed(event, data):
             drawingList = piDigitsList('r')
             draw(drawingList)
 
+    if(data.mode == 'freeDraw'):
+        if(data.width//2 - 137.5 <= x <= data.width//2 + 137.5 and data.height//2 - 30 <= y <= data.height//2 + 30):
+            freeDraw()
+        
+
 def keyPressed(event, data):
     if(event.keysym == 'h'):
         data.mode = 'splashScreen'
@@ -68,6 +78,8 @@ def keyPressed(event, data):
             data.mode = 'fractions'
         elif(event.keysym == 'p'):
             data.mode = 'pi'
+        elif(event.keysym == 'd'):
+            data.mode = 'freeDraw'
 
     if(data.mode == 'functions'):
         if(event.keysym == 'n'):
@@ -92,6 +104,10 @@ def keyPressed(event, data):
             drawingList = piDigitsList('r')
             draw(drawingList)
 
+    if data.mode == 'freeDraw':
+        freeDraw()
+
+
 def timerFired(data):
     pass
 
@@ -114,8 +130,11 @@ def redrawAll(canvas, data):
         canvas.create_rectangle(data.width//2 + 25, data.height//2 - 10, data.width//2 + 300, data.height//2 + 50)
         canvas.create_text(data.width//2 + 170, data.height//2 + 20, text = "Fractions", font = "Arial 20 bold", fill = 'red')
 
-        canvas.create_rectangle(data.width//2 - 137.5, data.height//2 + 100, data.width//2 + 137.5, data.height//2 + 160)
-        canvas.create_text(data.width//2, data.height//2 + 130, text = "PI <3", font = "Arial 20 bold", fill = 'red')
+        canvas.create_rectangle(data.width//2 - 300, data.height//2 + 100, data.width//2 -25, data.height//2 + 160)
+        canvas.create_text(data.width//2 - 170, data.height//2 + 130, text = "PI <3", font = "Arial 20 bold", fill = 'red')
+
+        canvas.create_rectangle(data.width//2 + 25, data.height//2 + 100, data.width//2 + 300, data.height//2 + 160)
+        canvas.create_text(data.width//2 + 170, data.height//2 + 130, text = "Free Style", font = "Arial 20 bold", fill = 'red')
 
     if(data.mode == 'functions'):
         canvas.create_image(400,275, image = data.functionsBackground)
@@ -161,6 +180,10 @@ def redrawAll(canvas, data):
         canvas.create_rectangle(data.width//3 + 200, data.height//3, data.width//3 + 475, data.height//3 + 60)
         canvas.create_text(data.width//3 + 337.5, data.height//3 + 30, text = 'Recursive Algorithm',
                                 font= 'Arial 20 bold', fill = 'red')
+    if(data.mode == 'freeDraw'):
+        canvas.create_rectangle(data.width//2 - 137.5, data.height//2 - 30, data.width//2 + 137.5, data.height//2 + 30)
+        canvas.create_text(data.width//2, data.height//2, text = "Free Style Drawing",
+                                    font = 'Arial 20 bold', fill = 'red')
 
     
 ####################################
