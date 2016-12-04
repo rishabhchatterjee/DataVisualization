@@ -111,16 +111,16 @@ def draw(drawingList):
 #                          SET DIGIT POSITIONS                                 #
 ################################################################################
 
-    # (0.00,-200.00)(128.56,-153.21)
-    # (128.56,-153.21)(196.96,-34.73)
-    # (196.96,-34.73)(173.21,100.00)
-    # (173.21,100.00)(68.40,187.94)
-    # (68.40,187.94)(-68.40,187.94)
-    # (-68.40,187.94)(-173.21,100.00)
-    # (-173.21,100.00)(-196.96,-34.73)
-    # (-196.96,-34.73)(-128.56,-153.21)
-    # (-128.56,-153.21)(-0.00,-200.00)
-    # (-0.00,-200.00)
+# 0 (192.56,-161.80)
+# 1 (265.21,-61.80)
+# 2 (265.21,61.80)
+# 3 (192.56,161.80)
+# 4 (75.00,200.00)
+# 5 (-42.56,161.80)
+# 6 (-115.21,61.80)
+# 7 (-115.21,-61.80)
+# 8 (-42.56,-161.80)
+# 9 (75.00,-200.00)
 
     digitPositions = dict()
     digitPositions[0] = [0,128, -200, -153]
@@ -134,12 +134,11 @@ def draw(drawingList):
     digitPositions[8] = [-196, -128, -153, -34]
     digitPositions[9] = [-128, 0, -200, -153]
 
-
     def getPosition(digit):
         r = 200
         yLowerBound = digitPositions[digit][2]
         yUpperBound = digitPositions[digit][3]
-        y = random.randint(yLowerBound, yUpperBound)
+        y = random.randint(min(yLowerBound, yUpperBound), max(yLowerBound,yUpperBound))
         if digit < 5:
             x = (r**2 - y**2)**0.5
         else:
@@ -147,14 +146,14 @@ def draw(drawingList):
         return (x,y)
 
     turtle.penup()
-    turtle.setpos(0,0)
+    turtle.setpos(75,0)
 
 ################################################################################
 #                           DRAW LINES & DOTS                                  #
 ################################################################################
     def getDrawingDotPosition(x,y):
-        xFactor = random.uniform(1.3,1.5)
-        yFactor = random.uniform(1.3,1.5)
+        xFactor = random.uniform(1.2,1.3)
+        yFactor = random.uniform(1.2,1.3)
         return (x*xFactor, y*yFactor)
 
     def playSound(d):
@@ -169,9 +168,11 @@ def draw(drawingList):
         if(d == 8): return w8
         if(d == 9): return w9
 
-    kosbie.speed(13)
-    turtle.speed(13)
-
+    kosbie.speed(50)
+    turtle.speed(50)
+    numberTurtle.speed(50)
+    colCount = 0
+    shifted = False
     def drawLines(practiceList, startPosition, i = 0):
         if(i == len(practiceList) - 1):
             return
@@ -199,19 +200,31 @@ def draw(drawingList):
             #kosbie.write(str(practiceList[i]), font = 'Times 20 bold')
             turtle.pendown()
 
-            numberTurtle.color(color)
-            numberTurtle.write(str(practiceList[i]), font = 'Arial 15 bold')
+            nonlocal colCount
+            nonlocal shifted
+
             (xNT, yNT) = numberTurtle.position()
-            if(yNT <= -320):
+            if not shifted:
+                if(colCount > 10):
+                    xNT = 275
+                    yNT = 320
+                    shifted = True
+
+            if(yNT <= -308):
+                colCount += 1
                 xNT += 10
-                yNT = 320
+                yNT = 308
             else:
                 yNT -= 12
+
             numberTurtle.penup()
             numberTurtle.setpos(xNT, yNT)
             numberTurtle.pendown()
+            numberTurtle.color(color)
+            numberTurtle.write(str(practiceList[i]), font = 'Arial 15 bold')
 
-
+            
+            
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
             turtle.goto(xStartCenterMid, yStartCenterMid)
             turtle.goto(xEndCenterMid, yEndCenterMid)
@@ -242,21 +255,21 @@ def drawNumbers(drawingList):
 
 #turtle.circle(50, -180)
 
-draw([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4,
- 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1, 6, 9, 3, 9, 
- 9, 3, 7, 5, 1, 0, 5, 8, 2, 0, 9, 7, 4, 9, 4, 4, 5, 9, 2, 3, 0, 7, 8, 1, 6, 4, 
- 0, 6, 2, 8, 6, 2, 0, 8, 9, 9, 8, 6, 2, 8, 0, 3, 4, 8, 2, 5, 3, 4, 2, 1, 1, 7, 
- 0, 6, 7, 9, 8, 2, 1, 4, 8, 0, 8, 6, 5, 1, 3, 2, 8, 2, 3, 0, 6, 6, 4, 7, 0, 9, 
- 3, 8, 4, 4, 6, 0, 9, 5, 5, 0, 5, 8, 2, 2, 3, 1, 7, 2, 5, 8, 9, 2, 4, 8, 3, 5, 
- 3, 6, 7, 6, 7, 4, 7, 1, 9, 2, 8, 9, 3, 7, 5, 4, 7, 9, 7, 6, 9, 4, 5, 1, 7, 9, 
- 1, 5, 7, 1, 2, 7, 1, 7, 4, 3, 8, 2, 9, 5, 2, 8, 8, 5, 2, 2, 6, 4, 0, 4, 0, 1, 
- 2, 7, 6, 8, 9, 6, 9, 9, 8, 2, 8, 7, 4, 1, 3, 1, 0, 9, 4, 0, 3, 7, 2, 9, 5, 1, 
- 2, 5, 0, 8, 4, 0, 7, 3, 1, 3, 1, 2, 5, 0, 9, 4, 0, 5, 5, 5, 0, 7, 9, 7, 4, 5, 
- 9, 6, 9, 7, 7, 3, 8, 0, 0, 0, 6, 2, 4, 3, 7, 9, 1, 4, 3, 4, 0, 1, 7, 6, 1, 9, 
- 9, 3, 0, 5, 5, 6, 3, 9, 8, 1, 9, 0, 5, 1, 1, 0, 7, 1, 9, 1, 7, 2, 4, 1, 2, 5, 
- 6, 6, 4, 6, 5, 6, 5, 5, 9, 5, 2, 2, 5, 8, 2, 9, 4, 3, 0, 4, 2, 7, 3, 8, 7, 5, 
- 3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
- 1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
-  8])
+# draw([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4,
+#  6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1, 6, 9, 3, 9, 
+#  9, 3, 7, 5, 1, 0, 5, 8, 2, 0, 9, 7, 4, 9, 4, 4, 5, 9, 2, 3, 0, 7, 8, 1, 6, 4, 
+#  0, 6, 2, 8, 6, 2, 0, 8, 9, 9, 8, 6, 2, 8, 0, 3, 4, 8, 2, 5, 3, 4, 2, 1, 1, 7, 
+#  0, 6, 7, 9, 8, 2, 1, 4, 8, 0, 8, 6, 5, 1, 3, 2, 8, 2, 3, 0, 6, 6, 4, 7, 0, 9, 
+#  3, 8, 4, 4, 6, 0, 9, 5, 5, 0, 5, 8, 2, 2, 3, 1, 7, 2, 5, 8, 9, 2, 4, 8, 3, 5, 
+#  3, 6, 7, 6, 7, 4, 7, 1, 9, 2, 8, 9, 3, 7, 5, 4, 7, 9, 7, 6, 9, 4, 5, 1, 7, 9, 
+#  1, 5, 7, 1, 2, 7, 1, 7, 4, 3, 8, 2, 9, 5, 2, 8, 8, 5, 2, 2, 6, 4, 0, 4, 0, 1, 
+#  2, 7, 6, 8, 9, 6, 9, 9, 8, 2, 8, 7, 4, 1, 3, 1, 0, 9, 4, 0, 3, 7, 2, 9, 5, 1, 
+#  2, 5, 0, 8, 4, 0, 7, 3, 1, 3, 1, 2, 5, 0, 9, 4, 0, 5, 5, 5, 0, 7, 9, 7, 4, 5, 
+#  9, 6, 9, 7, 7, 3, 8, 0, 0, 0, 6, 2, 4, 3, 7, 9, 1, 4, 3, 4, 0, 1, 7, 6, 1, 9, 
+#  9, 3, 0, 5, 5, 6, 3, 9, 8, 1, 9, 0, 5, 1, 1, 0, 7, 1, 9, 1, 7, 2, 4, 1, 2, 5, 
+#  6, 6, 4, 6, 5, 6, 5, 5, 9, 5, 2, 2, 5, 8, 2, 9, 4, 3, 0, 4, 2, 7, 3, 8, 7, 5, 
+#  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
+#  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
+#   8])
 
 #draw([1,2,3,4,5,6,7,8,9])

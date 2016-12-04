@@ -1,11 +1,9 @@
-# events-example0.py
-# Barebones timer, mouse, and keyboard events
 from functionsNormal import functionsNormal
 from fractions import *
 from piDigits import *
 from testFreeDrawing import *
-#from draw import *
-from testingDrawCurve import *
+#from testingDrawCurve import *
+from testingGenerateNumbers import *
 from tkinter import *
 from tkinter import simpledialog
 import turtle
@@ -34,7 +32,6 @@ def mousePressed(event, data):
             data.mode = 'fractions'
         if(data.width//2 - 300 <= x <= data.width//2 -25 and data.height//2 + 100 <= y <= data.height//2 + 160):
             data.mode = 'pi'
-        # canvas.create_rectangle(data.width//2 + 25, data.height//2 + 100, data.width//2 + 300, data.height//2 + 160)
         if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 + 100 <= y <= data.height//2 + 160):
             data.mode = 'freeDraw'
 
@@ -85,11 +82,10 @@ def keyPressed(event, data):
         if(event.keysym == 'n'):
             drawingList = functionsNormal('n')
             draw(drawingList)
-            #call normal funct mode
+
         if(event.keysym == 'm'):
             drawingList = functionsNormal('m')
             draw(drawingList)
-            #call mod arith mode
             
     if(data.mode == 'fractions'):
         if(event.keysym == 'space'):
@@ -165,7 +161,6 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2, data.height//4 + 35,
                                 text = "Click the fraction to start!",
                                     font = " Arial 24 bold")
-        #canvas.create_rectangle(data.width//2 - 100, data.height//2 - 100, data.width//2 + 100, data.height//2 + 100)
 
     if(data.mode == 'pi'):
         canvas.create_image(400,500, image = data.piBackground)
@@ -180,6 +175,7 @@ def redrawAll(canvas, data):
         canvas.create_rectangle(data.width//3 + 200, data.height//3, data.width//3 + 475, data.height//3 + 60)
         canvas.create_text(data.width//3 + 337.5, data.height//3 + 30, text = 'Recursive Algorithm',
                                 font= 'Arial 20 bold', fill = 'red')
+    
     if(data.mode == 'freeDraw'):
         canvas.create_rectangle(data.width//2 - 137.5, data.height//2 - 30, data.width//2 + 137.5, data.height//2 + 30)
         canvas.create_text(data.width//2, data.height//2, text = "Free Style Drawing",

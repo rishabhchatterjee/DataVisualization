@@ -17,8 +17,6 @@ def draw(drawingList):
     turtle.pensize(4)
     turtle.color('white')
 
-
-
     kosbie = turtle.Turtle()
     kosbie.color('orange')
     kosbie.hideturtle()
@@ -30,24 +28,16 @@ def draw(drawingList):
     kosbie.speed(13)
     turtle.speed(13)
 
-    # turtle.setpos(0,-25)
+    turtle.setpos(0,-100)
+    turtle.pendown()
+    turtle.begin_fill()
+    turtle.circle(100)
+    turtle.end_fill()
+    turtle.penup()
+    # turtle.setpos(0,-300)
     # turtle.pendown()
-    # turtle.begin_fill()
-    # turtle.circle(25)
-    # turtle.end_fill()
+    # turtle.circle(300)
     # turtle.penup()
-    # turtle.setpos(0,-50)
-    # turtle.pendown()
-    # turtle.circle(50)
-    # turtle.penup()
-    # turtle.setpos(0,-75)
-    # turtle.pendown()
-    # turtle.circle(75)
-    # turtle.penup()
-    # # turtle.setpos(0,-300)
-    # # turtle.pendown()
-    # # turtle.circle(300)
-    # # turtle.penup()
 
 ################################################################################
 #                             MAKE NUMBER DICT                                 #
@@ -158,8 +148,6 @@ def draw(drawingList):
         yFactor = random.uniform(1.3,1.5)
         return (x*xFactor, y*yFactor)
 
-    #startPosition = getPosition(drawingList[0])
-
     def playSound(d):
         if(d == 0): return w0
         if(d == 1): return w1
@@ -174,7 +162,6 @@ def draw(drawingList):
 
     kosbie.speed(13)
     turtle.speed(13)
-
 
     def drawLines(practiceList, startPosition, i = 0):
         if(i == len(practiceList) - 1):
@@ -204,14 +191,13 @@ def draw(drawingList):
             turtle.pendown()
 
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
-            #turtle.circle(distance/2, -180)
             turtle.goto(xStartCenterMid, yStartCenterMid)
             turtle.goto(xEndCenterMid, yEndCenterMid)
             turtle.goto(endPosition[0], endPosition[1])
 
             startPosition = endPosition
-            #turtle.right(angleShift)
             drawLines(practiceList,endPosition, i+1)
+
     print(drawingList)
     drawLines(drawingList, getPosition(drawingList[0]), 0)
     turtle.exitonclick()
@@ -235,4 +221,4 @@ def draw(drawingList):
 #  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
-#draw([1,2,3,4,5,6,7,8,9])
+draw([1,2,3,4,5,6,7,8,9])

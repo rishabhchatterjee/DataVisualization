@@ -1,7 +1,6 @@
 import turtle
 import random
 
-
 def freeDraw():
 
     def setup():
