@@ -26,6 +26,9 @@ def mousePressed(event, data):
     if(data.width - 100 <= x <= data.width - 50 and 50 <= y <= 100):
         init(data)
 
+    if( 30 <= x <= 110 and 20 <= y <= 70):
+        data.mode = 'help'
+
     if(data.mode == 'splashScreen'):
         if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
             data.mode = 'functions'
@@ -116,6 +119,10 @@ def redrawAll(canvas, data):
     canvas.create_rectangle(data.width - 70, 60, data.width - 60, 70)
     canvas.create_text(data.width - 75, 90, text = 'HOME', font = 'Arial 10 bold', fill = 'red')
 
+    def help():
+        canvas.create_rectangle(30, 20, 110,70, width = 1, outline = 'red')
+        canvas.create_text(70, 45, text = 'HELP', font = "Arial 15 bold")
+
     if(data.mode == 'splashScreen'):
         canvas.create_text(data.width//2, data.height//4 + 25, 
                                 text = "Welcome to Data Visualization",
@@ -132,6 +139,8 @@ def redrawAll(canvas, data):
 
         canvas.create_rectangle(data.width//2 + 25, data.height//2 + 100, data.width//2 + 300, data.height//2 + 160)
         canvas.create_text(data.width//2 + 170, data.height//2 + 130, text = "Free Style", font = "Arial 20 bold", fill = 'red')
+
+        help()
 
     if(data.mode == 'functions'):
         canvas.create_image(400,275, image = data.functionsBackground)
@@ -151,6 +160,7 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2, data.height - 200, 
             text = 'Modular Arithemtic Mode : In this mode the values of the function \nis evaluated and the one\'s digit (found by mod 10) is visualized',
                 font = 'Arial 20 bold', fill = 'blue')
+        help()
         
         data.functionsPageLoaded = True
 
@@ -162,6 +172,7 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2, data.height//4 + 35,
                                 text = "Click the fraction to start!",
                                     font = " Arial 24 bold")
+        help()
 
     if(data.mode == 'pi'):
         canvas.create_image(400,500, image = data.piBackground)
@@ -176,11 +187,43 @@ def redrawAll(canvas, data):
         canvas.create_rectangle(data.width//3 + 200, data.height//3, data.width//3 + 475, data.height//3 + 60)
         canvas.create_text(data.width//3 + 337.5, data.height//3 + 30, text = 'Recursive Algorithm',
                                 font= 'Arial 20 bold', fill = 'red')
+        help()
     
     if(data.mode == 'freeDraw'):
         canvas.create_rectangle(data.width//2 - 137.5, data.height//2 - 30, data.width//2 + 137.5, data.height//2 + 30)
         canvas.create_text(data.width//2, data.height//2, text = "Free Style Drawing",
                                     font = 'Arial 20 bold', fill = 'red')
+        help()
+
+    text = '''\
+    Welcome to Data Visualization! This program has 4 modes as shown below.
+
+    First, Functions mode. Functions mode has two sub-modes, Normal and Modular Arithemtic 
+    Mode as explained on the Functions page.This mode evaluates a function in the given range 
+    of \'x\' values (the maximum \'x\' value input which you enter) and visualizes it as per 
+    the sub-mode.
+
+    Second, Fractions mode. Fractions mode let's you input a numerator, denominator, and 
+    number of digits you wish to visualize. Using a recursive algorithm, the program 
+    evaluates the quotient as many times as the maximum digits you have inputted. The 
+    algorithm stops the visualization the moment it notices five or more 0\'s\'s 
+    consecutively after the decimal point.
+
+    Third, Pi <3 mode. Pi mode has two sub-modes, Chudnovsky Algorithm (used to calculate)
+    the n-th digit after the decimal point using a formula), and a Recursive Algorithm,
+    which works on the same principle as recursive division for fractions. You will be 
+    prompted to input number of digits after decimal point to calculate till.
+
+    Fourth, Free Drawing Mode. This mode allows you to draw whatever you want! Feel
+    free and let your imagination flow!
+
+    NOTE: The program will automatically take a Screenshot of what you have visualized
+    save it to the current folder (directory) you are in!
+    '''
+    if(data.mode == 'help'):
+        canvas.create_text(data.width//2, data.height//6, text = "HELP MODE", font = "Arial 20 bold underline", fill ='red')
+        canvas.create_text(data.width//3 + 100, data.height//3 + 125,
+                        text = text, font = 'Arial 15 bold')
 
     
 ####################################
@@ -229,6 +272,6 @@ def run(width=300, height=300):                 # adapted from course notes
     timerFiredWrapper(canvas, data)
     # and launch the app
     root.mainloop()  # blocks until window is closed
-    print("bye!")
+    print("Thank You!")
 
 run(800, 800)

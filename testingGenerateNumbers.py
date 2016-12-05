@@ -130,17 +130,6 @@ def draw(drawingList):
 #                          SET DIGIT POSITIONS                                 #
 ################################################################################
 
-# 0 (192.56,-161.80)
-# 1 (265.21,-61.80)
-# 2 (265.21,61.80)
-# 3 (192.56,161.80)
-# 4 (75.00,200.00)
-# 5 (-42.56,161.80)
-# 6 (-115.21,61.80)
-# 7 (-115.21,-61.80)
-# 8 (-42.56,-161.80)
-# 9 (75.00,-200.00)
-
     digitPositions = dict()
     digitPositions[0] = [0,128, -200, -153]
     digitPositions[1] = [128, 196, -153, -34]
@@ -266,8 +255,6 @@ def draw(drawingList):
                     zeroTurtle.pendown()
                 if(zeroRowCount >= 8):
                     zeroTurtle.hideturtle()
-
-
             
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
             turtle.goto(xStartCenterMid, yStartCenterMid)
@@ -279,7 +266,7 @@ def draw(drawingList):
             
     #print(drawingList)
     drawLines(drawingList, getPosition(drawingList[0]), 0)
-    #turtle.onclick(takeScreenshot())
+    turtle.onclick(takeScreenshot())
     turtle.exitonclick()
     turtle.done()
 
