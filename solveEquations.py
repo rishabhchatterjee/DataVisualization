@@ -1,18 +1,15 @@
 import math, string
 from calculateFractions import callWithLargeStack
 from tkinter import simpledialog
-"""
-from tkinter import messagebox
 
+solutions = set()
 
-"""
 class Equation(object):
     def __init__(self, degree, mode = 'n', digits = 100):
         self.degree = int(degree)
         self.mode = mode
         self.digits = digits
         coeffs = ['a','b','c','d','e','f','g','h','i','j']
-        #self.constant = int(input('Input constant term\n'))
         self.constant = int(simpledialog.askstring(" ",'Input constant term' ))
         if(self.degree == 1):
             self.a = int(simpledialog.askstring(" ", 'Input coefficient of x'))
@@ -103,6 +100,7 @@ class Equation(object):
             return '%dx^10 + %dx^9 + %dx^8 + %dx^7 + %dx^6 + %dx^5 + %dx^4 + %dx^3 + %dx^2 +%dx + %d' %(self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.h, self.i, self.j, self.constant)
 
     def findValuesFunctions(self, f, digits = 10, mode = 'n', count = 0, ans = []):
+        global solutions
         if(count >= int(digits)):
             return []
         else:
@@ -118,6 +116,8 @@ class Equation(object):
                     for digit in temp:
                         ans.append(digit)
                 else:
+                    if(val == 0):
+                        solutions.add(count)
                     ans.append(val)
             else:
                 ans.append(val%10)
@@ -165,10 +165,6 @@ class Equation(object):
             def f(x):
                 return self.a*x**10 + self.b*x**9 + self.c*x**8 + self.d*x**7 + self.e*x**6 + self.f*x**5 + self.g*x**4 + self.h*3 + self.i*x**2 + self.j*x + self.constant
             return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
-# degree = input('Input degree of polynomial (upto and including 5)\n')
-# A = Equation(degree, 'm', 1)
-# print(A, '\n\n',A.makeFunction())
-
 
 
 

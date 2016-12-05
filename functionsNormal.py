@@ -1,5 +1,4 @@
-from solveEquations import Equation
-#from drawTurtle import setup
+from solveEquations import Equation, solutions
 from tkinter import simpledialog
 
 def functionsNormal(mode = 'n'):
@@ -9,12 +8,10 @@ def functionsNormal(mode = 'n'):
     digits = simpledialog.askstring(" ", 'Input maximum value of \'x\'')
     A = Equation(degree, mode, digits)
     drawingList = A.makeFunction()
-    print('\nEquation entered is y = ', A, '\n')
+    print('\nEquation entered is y = ', A, '\n', solutions)
     print(drawingList)
-    return (drawingList)
+    return drawingList
 
-#print(functionsNormal('n'))
-#setup()
     
 
 

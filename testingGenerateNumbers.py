@@ -4,9 +4,10 @@ import random
 from playingWithPyAudio import *
 import threading
 from testingScreenshot import takeScreenshot
+from solveEquations import solutions
 
 
-def draw(drawingList):
+def draw(drawingList, mode = 'NotFunctionNormal'):
 ################################################################################
 #                            MAKE HEADINGS ETC                                 #
 ################################################################################
@@ -27,7 +28,6 @@ def draw(drawingList):
     numberTurtle = turtle.Turtle()
     numberTurtle.shape('turtle')
     numberTurtle.color('red')
-    #numberTurtle.hideturtle()
     numberTurtle.penup()
     numberTurtle.setpos(-385,320)
 
@@ -62,10 +62,6 @@ def draw(drawingList):
     turtle.circle(100)
     turtle.end_fill()
     turtle.penup()
-    # turtle.setpos(0,-300)
-    # turtle.pendown()
-    # turtle.circle(300)
-    # turtle.penup()
 
 ################################################################################
 #                             MAKE NUMBER DICT                                 #
@@ -123,7 +119,6 @@ def draw(drawingList):
         turtle.penup()
         turtle.circle(225,36)
 
-    #turtle.hideturtle()
     turtle.pensize(1)
 
 ################################################################################
@@ -143,6 +138,7 @@ def draw(drawingList):
     digitPositions[9] = [-128, 0, -200, -153]
 
     def getPosition(digit):
+
         r = 200
         yLowerBound = digitPositions[digit][2]
         yUpperBound = digitPositions[digit][3]
@@ -164,30 +160,81 @@ def draw(drawingList):
         yFactor = random.uniform(1.2,1.3)
         return (x*xFactor, y*yFactor)
 
-    def playSound(d):
-        if(d == 0): return w0
-        if(d == 1): return w1
-        if(d == 2): return w2
-        if(d == 3): return w3
-        if(d == 4): return w4
-        if(d == 5): return w5
-        if(d == 6): return w6
-        if(d == 7): return w7
-        if(d == 8): return w8
-        if(d == 9): return w9
+    # def playSound(d):
+    #     if(d == 0): return w0
+    #     if(d == 1): return w1
+    #     if(d == 2): return w2
+    #     if(d == 3): return w3
+    #     if(d == 4): return w4
+    #     if(d == 5): return w5
+    #     if(d == 6): return w6
+    #     if(d == 7): return w7
+    #     if(d == 8): return w8
+    #     if(d == 9): return w9
 
-    kosbie.speed(50)
-    turtle.speed(50)
-    numberTurtle.speed(50)
+    kosbie.speed(100)
+    turtle.speed(100)
+    numberTurtle.speed(100)
+    extraTurtle.speed(100)
+
     colCount = 0
     shifted = False
     zeroSwapped = False
     zeroRowCount = 0
+
+    def writeSolutions(i,practiceList, color = 'red'):
+        (xZero, yZero) = zeroTurtle.position()
+        nonlocal zeroRowCount
+        if(xZero >= 180):
+            yZero -= 12
+            xZero = -245
+            zeroRowCount += 1
+        nonlocal zeroSwapped
+        if not zeroSwapped:
+            if(yZero <= 255):
+                yZero = -276
+                xZero = -245
+                zeroSwapped = True
+        if(zeroRowCount < 8):
+            zeroTurtle.color(color)
+            zeroTurtle.write(str(i), font = 'Arial 15 bold')
+            xZero += 25
+            zeroTurtle.penup()
+            zeroTurtle.setpos(xZero,yZero)
+            zeroTurtle.pendown()
+        if(zeroRowCount >= 8):
+            zeroTurtle.hideturtle()
+
+    def writeNumbers(i,practiceList, color):
+        nonlocal colCount
+        nonlocal shifted
+
+        (xNT, yNT) = numberTurtle.position()
+        if not shifted:
+            if(colCount > 10):
+                xNT = 275
+                yNT = 320
+                shifted = True
+
+        if(yNT <= -308):
+            colCount += 1
+            xNT += 10
+            yNT = 308
+        else:
+            yNT -= 12
+
+        numberTurtle.penup()
+        numberTurtle.setpos(xNT, yNT)
+        numberTurtle.pendown()
+        numberTurtle.color(color)
+        numberTurtle.write(str(practiceList[i]), font = 'Arial 15 bold')
+
     def drawLines(practiceList, startPosition, i = 0):
         if(i == len(practiceList) - 1):
             return
         else:
-            endPosition = getPosition(practiceList[i+1])
+
+            endPosition = getPosition(practiceList[i])
 
             xStartCenterMid = startPosition[0]/2
             yStartCenterMid = startPosition[1]/2
@@ -199,6 +246,7 @@ def draw(drawingList):
 
             #play('saxSounds/' + str(practiceList[i]) + '.wav')
             #play(playSound(practiceList[i]))
+
             turtle.penup()
             turtle.setpos(startPosition[0], startPosition[1])
             pos = getDrawingDotPosition(startPosition[0], startPosition[1])
@@ -207,54 +255,12 @@ def draw(drawingList):
             kosbie.begin_fill()                 #
             kosbie.circle(random.randint(2,5))  #
             kosbie.end_fill()                   #
-            #kosbie.write(str(practiceList[i]), font = 'Times 20 bold')
             turtle.pendown()
 
-            nonlocal colCount
-            nonlocal shifted
-
-            (xNT, yNT) = numberTurtle.position()
-            if not shifted:
-                if(colCount > 10):
-                    xNT = 275
-                    yNT = 320
-                    shifted = True
-
-            if(yNT <= -308):
-                colCount += 1
-                xNT += 10
-                yNT = 308
-            else:
-                yNT -= 12
-
-            numberTurtle.penup()
-            numberTurtle.setpos(xNT, yNT)
-            numberTurtle.pendown()
-            numberTurtle.color(color)
-            numberTurtle.write(str(practiceList[i]), font = 'Arial 15 bold')
+            writeNumbers(i,practiceList, color)
             
-            (xZero, yZero) = zeroTurtle.position()
-            nonlocal zeroRowCount
-            if(practiceList[i] == 0):
-                if(xZero >= 180):
-                    yZero -= 12
-                    xZero = -245
-                    zeroRowCount += 1
-                nonlocal zeroSwapped
-                if not zeroSwapped:
-                    if(yZero <= 235):
-                        yZero = -276
-                        xZero = -245
-                        zeroSwapped = True
-                if(zeroRowCount < 8):
-                    zeroTurtle.color(color)
-                    zeroTurtle.write(str(i), font = 'Arial 15 bold')
-                    xZero += 25
-                    zeroTurtle.penup()
-                    zeroTurtle.setpos(xZero,yZero)
-                    zeroTurtle.pendown()
-                if(zeroRowCount >= 8):
-                    zeroTurtle.hideturtle()
+            if(i in solutions):
+                writeSolutions(i,practiceList, color)
             
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
             turtle.goto(xStartCenterMid, yStartCenterMid)
@@ -263,9 +269,9 @@ def draw(drawingList):
 
             startPosition = endPosition
             drawLines(practiceList,endPosition, i+1)
-            
-    #print(drawingList)
-    drawLines(drawingList, getPosition(drawingList[0]), 0)
+    
+    startPosition = getPosition(drawingList[0])
+    drawLines(drawingList, startPosition, 0)
     turtle.hideturtle()
     numberTurtle.hideturtle()
     extraTurtle.hideturtle()
@@ -289,8 +295,6 @@ def drawNumbers(drawingList):
         numberTurtle.setpos(x+5,y)
 
 
-#turtle.circle(50, -180)
-
 # draw([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4,
 #  6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1, 6, 9, 3, 9, 
 #  9, 3, 7, 5, 1, 0, 5, 8, 2, 0, 9, 7, 4, 9, 4, 4, 5, 9, 2, 3, 0, 7, 8, 1, 6, 4, 
@@ -308,4 +312,5 @@ def drawNumbers(drawingList):
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
 #draw([0]*500)
-#draw([1,2,9])
+#draw(list(range(100)))
+#draw(['X',1,2,9])

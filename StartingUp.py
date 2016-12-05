@@ -42,10 +42,10 @@ def mousePressed(event, data):
         if(data.functionsPageLoaded == True):
             if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
                 drawingList = functionsNormal('n')
-                draw(drawingList)
+                draw(drawingList, 'functionNormal')
             if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 10 <= y <= data.height//2 + 50):
-                (drawingList,heading) = functionsNormal('m')
-                draw(drawingList) 
+                drawingList = functionsNormal('m')
+                draw(drawingList,'notFunctionNormal') 
 
     if(data.mode == 'fractions'):
         if(data.width//2 - 100 <= x <= data.width//2 + 100 and data.height//2 - 100 <= y <= data.height//2 + 100):
