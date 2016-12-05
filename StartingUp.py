@@ -2,7 +2,6 @@ from functionsNormal import functionsNormal
 from fractions import *
 from piDigits import *
 from testFreeDrawing import *
-#from testingDrawCurve import *
 from testingGenerateNumbers import *
 from tkinter import *
 from tkinter import simpledialog

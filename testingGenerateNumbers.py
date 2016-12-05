@@ -40,7 +40,7 @@ def draw(drawingList):
     extraTurtle.write('Takes screenshot when over!', font = 'Arial 10 bold')
     extraTurtle.penup()
     extraTurtle.setpos(-225, 295)
-    extraTurtle.write('Interger Solutions (for functions) / index value of 0\'s (for rational and irrational numbers)', font = "Arial 10 bold")
+    extraTurtle.write('Integer Solutions (for functions) / index value of 0\'s (for rational and irrational numbers)', font = "Arial 10 bold")
     extraTurtle.hideturtle()
 
     zeroTurtle = turtle.Turtle()
@@ -266,6 +266,10 @@ def draw(drawingList):
             
     #print(drawingList)
     drawLines(drawingList, getPosition(drawingList[0]), 0)
+    turtle.hideturtle()
+    numberTurtle.hideturtle()
+    extraTurtle.hideturtle()
+    kosbie.hideturtle()
     turtle.onclick(takeScreenshot())
     turtle.exitonclick()
     turtle.done()
