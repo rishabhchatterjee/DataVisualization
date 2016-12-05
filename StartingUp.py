@@ -28,6 +28,9 @@ def mousePressed(event, data):
     if( 30 <= x <= 110 and 20 <= y <= 70):
         data.mode = 'help'
 
+    if( 150 <= x <= 230 and 20 <= y <= 70):
+        data.mode = 'aboutUs'
+
     if(data.mode == 'splashScreen'):
         if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
             data.mode = 'functions'
@@ -120,7 +123,11 @@ def redrawAll(canvas, data):
 
     def help():
         canvas.create_rectangle(30, 20, 110,70, width = 1, outline = 'red')
-        canvas.create_text(70, 45, text = 'HELP', font = "Arial 15 bold")
+        canvas.create_text(70, 45, text = 'HELP', font = "Arial 13 bold")
+
+    def aboutUs():
+        canvas.create_rectangle(150, 20, 230,70, width = 1, outline = 'red')
+        canvas.create_text(190, 45, text = 'ABOUT US', font = "Arial 13 bold")
 
     if(data.mode == 'splashScreen'):
         canvas.create_text(data.width//2, data.height//4 + 25, 
@@ -140,6 +147,7 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2 + 170, data.height//2 + 130, text = "Free Style", font = "Arial 20 bold", fill = 'red')
 
         help()
+        aboutUs()
 
     if(data.mode == 'functions'):
         canvas.create_image(400,275, image = data.functionsBackground)
@@ -172,6 +180,7 @@ def redrawAll(canvas, data):
                                 text = "Click the fraction to start!",
                                     font = " Arial 24 bold")
         help()
+        aboutUs()
 
     if(data.mode == 'pi'):
         canvas.create_image(400,500, image = data.piBackground)
@@ -187,12 +196,14 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//3 + 337.5, data.height//3 + 30, text = 'Recursive Algorithm',
                                 font= 'Arial 20 bold', fill = 'red')
         help()
+        aboutUs()
     
     if(data.mode == 'freeDraw'):
         canvas.create_rectangle(data.width//2 - 137.5, data.height//2 - 30, data.width//2 + 137.5, data.height//2 + 30)
         canvas.create_text(data.width//2, data.height//2, text = "Free Style Drawing",
                                     font = 'Arial 20 bold', fill = 'red')
         help()
+        aboutUs()
 
     text = '''\
     Welcome to Data Visualization! This program has 4 modes as shown below.
@@ -223,6 +234,28 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2, data.height//6, text = "HELP MODE", font = "Arial 20 bold underline", fill ='red')
         canvas.create_text(data.width//3 + 100, data.height//3 + 125,
                         text = text, font = 'Arial 15 bold')
+        aboutUs()
+
+    aboutUsText = '''\
+    Numbers are beautiful. However, their beuaty is hidden in their 'raw' form. When we 
+    see them as simple digits, we cannot understand their potential - what they can represent. 
+
+    This program helps us do two things, first visualize the numbers, and second see 
+    the beauty of numbers. It uses modular arithmetic (if mode is selected) and recursive
+    division and drawing to make a network representing how functions, rational, and 
+    irrational numbers behave with time. 
+
+    Using the drawing algorithm, three types of  networks are made - one is a line 
+    gradient, second is a circular network, and third is a scatterplot - all on the 
+    same page, simultaneously.
+    '''
+    if(data.mode == 'aboutUs'):
+        canvas.create_text(data.width//2, data.height//6, text = "ABOUT US", font = "Arial 20 bold underline", fill ='red')
+        canvas.create_text(data.width//3 + 100, data.height//3 + 50,
+                        text = aboutUsText, font = 'Arial 15 bold')   
+        canvas.create_text(data.width//2 + 320, data.height//2 + 250, 
+                            text = 'Rishabh Chatterjee \nDec. 2016 (c)', font = 'Arial 9 bold')
+        help()     
 
     
 ####################################

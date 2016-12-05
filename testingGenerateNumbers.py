@@ -5,6 +5,7 @@ from playingWithPyAudio import *
 import threading
 from testingScreenshot import takeScreenshot
 from solveEquations import solutions
+import threading
 
 
 def draw(drawingList, mode = 'NotFunctionNormal'):
@@ -160,22 +161,10 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
         yFactor = random.uniform(1.2,1.3)
         return (x*xFactor, y*yFactor)
 
-    # def playSound(d):
-    #     if(d == 0): return w0
-    #     if(d == 1): return w1
-    #     if(d == 2): return w2
-    #     if(d == 3): return w3
-    #     if(d == 4): return w4
-    #     if(d == 5): return w5
-    #     if(d == 6): return w6
-    #     if(d == 7): return w7
-    #     if(d == 8): return w8
-    #     if(d == 9): return w9
-
-    kosbie.speed(100)
-    turtle.speed(100)
-    numberTurtle.speed(100)
-    extraTurtle.speed(100)
+    kosbie.speed(15)
+    turtle.speed(15)
+    numberTurtle.speed(15)
+    extraTurtle.speed(15)
 
     colCount = 0
     shifted = False
@@ -244,8 +233,12 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
             color = random.choice(numberColors[practiceList[i]])
             turtle.color(color)
 
-            #play('saxSounds/' + str(practiceList[i]) + '.wav')
-            #play(playSound(practiceList[i]))
+            # if(practiceList[i] == 0):
+            #     thread1  = play('newSounds/bass.wav')
+            # elif(practiceList[i] % 2 == 0):
+            #     thread2 = play('newSounds/mix.wav')
+            # else:
+            #     thread3 = play('newSounds/piano.wav')
 
             turtle.penup()
             turtle.setpos(startPosition[0], startPosition[1])
@@ -272,6 +265,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
             turtle.goto(endPosition[0], endPosition[1])
 
             startPosition = endPosition
+
             drawLines(practiceList,endPosition, i+1)
     
     startPosition = getPosition(drawingList[0])
@@ -316,5 +310,4 @@ def drawNumbers(drawingList):
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
 #draw([0]*500)
-#draw(list(range(100)))
-#draw(['X',1,2,9])
+#draw(list(range(10)))
