@@ -259,8 +259,12 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
 
             writeNumbers(i,practiceList, color)
             
-            if(i in solutions):
-                writeSolutions(i,practiceList, color)
+            if(mode == 'functionNormal'):
+                if(i in solutions):
+                    writeSolutions(i,practiceList, color)
+            else:
+                if(practiceList[i] == 0):
+                    writeSolutions(i,practiceList,color)
             
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
             turtle.goto(xStartCenterMid, yStartCenterMid)
