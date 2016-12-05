@@ -30,7 +30,7 @@ def freeDraw():
     def changeColor(event):
         nonlocal count 
         count += 1
-        colors = ['black','red','dark green','blue','orange','brown']
+        colors = ['black','red','dark green','blue','orange','hot pink']
         turtle.color(colors[count%6])
 
 

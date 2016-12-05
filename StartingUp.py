@@ -7,6 +7,7 @@ from testingGenerateNumbers import *
 from tkinter import *
 from tkinter import simpledialog
 import turtle
+from testingScreenshot import takeScreenshot
 
 ####################################
 # customize these functions
@@ -41,7 +42,7 @@ def mousePressed(event, data):
                 drawingList = functionsNormal('n')
                 draw(drawingList)
             if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 10 <= y <= data.height//2 + 50):
-                drawingList = functionsNormal('m')
+                (drawingList,heading) = functionsNormal('m')
                 draw(drawingList) 
 
     if(data.mode == 'fractions'):

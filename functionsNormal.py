@@ -11,7 +11,7 @@ def functionsNormal(mode = 'n'):
     drawingList = A.makeFunction()
     print('\nEquation entered is y = ', A, '\n')
     print(drawingList)
-    return drawingList
+    return (drawingList)
 
 #print(functionsNormal('n'))
 #setup()

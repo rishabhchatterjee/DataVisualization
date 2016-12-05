@@ -3,7 +3,7 @@ import math
 import random
 from playingWithPyAudio import *
 import threading
-from threading import Thread
+from testingScreenshot import takeScreenshot
 
 
 def draw(drawingList):
@@ -30,6 +30,25 @@ def draw(drawingList):
     #numberTurtle.hideturtle()
     numberTurtle.penup()
     numberTurtle.setpos(-385,320)
+
+    extraTurtle = turtle.Turtle()
+    extraTurtle.shape('turtle')
+    extraTurtle.color('white')
+    extraTurtle.penup()
+    extraTurtle.setpos(210,310)
+    extraTurtle.pendown()
+    extraTurtle.write('Takes screenshot when over!', font = 'Arial 10 bold')
+    extraTurtle.penup()
+    extraTurtle.setpos(-225, 295)
+    extraTurtle.write('Interger Solutions (for functions) / index value of 0\'s (for rational and irrational numbers)', font = "Arial 10 bold")
+    extraTurtle.hideturtle()
+
+    zeroTurtle = turtle.Turtle()
+    zeroTurtle.shape('turtle')
+    zeroTurtle.color('pink')
+    zeroTurtle.penup()
+    zeroTurtle.setpos(-220, 280)
+
 
 ################################################################################
 #                           MAKE INNER CIRCLES                                 #
@@ -173,6 +192,8 @@ def draw(drawingList):
     numberTurtle.speed(50)
     colCount = 0
     shifted = False
+    zeroSwapped = False
+    zeroRowCount = 0
     def drawLines(practiceList, startPosition, i = 0):
         if(i == len(practiceList) - 1):
             return
@@ -222,8 +243,31 @@ def draw(drawingList):
             numberTurtle.pendown()
             numberTurtle.color(color)
             numberTurtle.write(str(practiceList[i]), font = 'Arial 15 bold')
-
             
+            (xZero, yZero) = zeroTurtle.position()
+            nonlocal zeroRowCount
+            if(practiceList[i] == 0):
+                if(xZero >= 180):
+                    yZero -= 12
+                    xZero = -245
+                    zeroRowCount += 1
+                nonlocal zeroSwapped
+                if not zeroSwapped:
+                    if(yZero <= 235):
+                        yZero = -276
+                        xZero = -245
+                        zeroSwapped = True
+                if(zeroRowCount < 8):
+                    zeroTurtle.color(color)
+                    zeroTurtle.write(str(i), font = 'Arial 15 bold')
+                    xZero += 25
+                    zeroTurtle.penup()
+                    zeroTurtle.setpos(xZero,yZero)
+                    zeroTurtle.pendown()
+                if(zeroRowCount >= 8):
+                    zeroTurtle.hideturtle()
+
+
             
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
             turtle.goto(xStartCenterMid, yStartCenterMid)
@@ -235,6 +279,7 @@ def draw(drawingList):
             
     #print(drawingList)
     drawLines(drawingList, getPosition(drawingList[0]), 0)
+    #turtle.onclick(takeScreenshot())
     turtle.exitonclick()
     turtle.done()
 
@@ -271,5 +316,5 @@ def drawNumbers(drawingList):
 #  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
-
-#draw([1,2,3,4,5,6,7,8,9])
+#draw([0]*500)
+#draw([1,2,9])

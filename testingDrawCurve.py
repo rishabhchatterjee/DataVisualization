@@ -2,6 +2,7 @@ import turtle
 import math
 import random
 from playingWithPyAudio import *
+from testingScreenshot import takeScreenshot
 
 
 def draw(drawingList):
