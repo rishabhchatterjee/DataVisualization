@@ -4,9 +4,11 @@
 
 Using turtle graphics, I wish to create a data visualization engine for rational and irrational numbers (like pi) as well as functions. I will visualize each digit of the real number using recursive division (as well as Chudnovsky's Alg for pi for extra precision since my recursive division gives precision upto 10^-6) using a circular web. The circle will have 10 parts, each part being a digit from 0-9 and color coded. As the digits are being calculated via recursive division, a network will be drawn from one digit to the next and so on. For functions I have two intentions -- first plotting digit by digit and second using Modular Arithemetic mod 10 to get the one's digit and plotting that (left to the choice of the user). This will yield a complex web of connections which looks really pretty. While the lines are being drawn there will also be a tone that is played (each digit having a distinct sound) as to create music with numbers. This will add a new dimension to 'visualizing' data. 
 
-Also note that there will also be a third component (apart from functions and real numbers) which will allow you to build a network, or visualize, data in the form of a list, for example pricing data from a csv file or weather data etc. I will demo this using web scraping and visualizing that data.
+The program also makes a sound wheenever it encounters an integer solution to the function or a 0 in the decimal expansion and displays the solution/index value of the zero. 
 
-This product can be used to teach people. Firstly, it is user-friendly since it creates art from numbers. This will make people love numbers instead of fearing them. Secondly, it is really helpful for those who prefer a visual learning method. Thirdly, while this is a stretch, it can help visually impaired people 'visualize' numbers since each digit will have a distinct sound to it.
+The visualization is three parts -- a gradient, scatterplot, and a network.
+
+This product can be used to teach people. Firstly, it is user-friendly since it creates art from numbers. This will make people love numbers instead of fearing them. Secondly, it is really helpful for those who prefer a visual learning method. 
 
 # Modules
 
