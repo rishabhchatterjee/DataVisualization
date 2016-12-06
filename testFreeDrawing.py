@@ -1,5 +1,6 @@
 import turtle
 import random
+from testingScreenshot import *
 
 def freeDraw():
 
@@ -21,7 +22,11 @@ def freeDraw():
         turtle.penup()
         turtle.setpos(-320, 190)
         turtle.pendown()
-        turtle.write("Click 'd' to go back to drawing mode from eraser!!", font = 'Arial 12 bold')
+        turtle.write("Click 'd' to go back to drawing mode from eraser!", font = 'Arial 12 bold')
+        turtle.penup()
+        turtle.setpos(-320, 170)
+        turtle.pendown()
+        turtle.write("Click 's' to take Screenshot!", font = 'Arial 12 bold')
         turtle.penup()
         turtle.setpos(0,0)
 
@@ -55,6 +60,9 @@ def freeDraw():
         nonlocal count
         count -= 1
 
+    def screenshot(event):
+        takeScreenshotFreeDraw()
+
     turtle.reset()
     turtle.speed(0)
 
@@ -68,6 +76,7 @@ def freeDraw():
     c.bind("<c>", changeColor)
     c.bind("<e>", eraser)
     c.bind("<d>", changeColor)
+    c.bind("<s>", screenshot)
 
 
     s=turtle.Screen()
