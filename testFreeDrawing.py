@@ -4,11 +4,24 @@ import random
 def freeDraw():
 
     def setup():
-        turtle.shape('turtle')
+        turtle.color('black')
+        turtle.shape('circle')
         turtle.penup()
-        turtle.setpos(-125,200)
+        turtle.setpos(-320,250)
         turtle.pendown()
-        turtle.write("Click 'c' to change turtle colors!", font = 'Arial 20 bold')
+        turtle.write("Click 'c' to change turtle colors!", font = 'Arial 12 bold')
+        turtle.penup()
+        turtle.setpos(-320, 230)
+        turtle.pendown()
+        turtle.write("Click 'e' for eraser!", font = 'Arial 12 bold')
+        turtle.penup()
+        turtle.setpos(-320, 210)
+        turtle.pendown()
+        turtle.write("Click 'esc' to clear screen!", font = 'Arial 12 bold')
+        turtle.penup()
+        turtle.setpos(-320, 190)
+        turtle.pendown()
+        turtle.write("Click 'd' to go back to drawing mode from eraser!!", font = 'Arial 12 bold')
         turtle.penup()
         turtle.setpos(0,0)
 
@@ -25,14 +38,22 @@ def freeDraw():
 
     def reset(event):
         turtle.clear()
+        setup()
 
     count = 0
     def changeColor(event):
         nonlocal count 
+        turtle.pensize(1)
         count += 1
         colors = ['black','red','dark green','blue','orange','hot pink']
         turtle.color(colors[count%6])
 
+    def eraser(event):
+        turtle.pensize(12)
+        turtle.color('white')
+        turtle.shape('circle')
+        nonlocal count
+        count -= 1
 
     turtle.reset()
     turtle.speed(0)
@@ -45,6 +66,8 @@ def freeDraw():
     c.bind("<ButtonRelease-1>", release)
     c.bind("<Escape>",reset)
     c.bind("<c>", changeColor)
+    c.bind("<e>", eraser)
+    c.bind("<d>", changeColor)
 
 
     s=turtle.Screen()
