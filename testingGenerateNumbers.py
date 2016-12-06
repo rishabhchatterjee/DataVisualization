@@ -173,7 +173,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     zeroRowCount = 1
 
     def writeSolutions(i,practiceList, color = 'red'):
-        index = random.randint(0,2)
+        index = random.randint(0,4)
         play('zeroSounds/' + str(index) + '.wav')
         (xZero, yZero) = zeroTurtle.position()
         nonlocal zeroRowCount
@@ -210,7 +210,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
 
         if(yNT <= -308):
             colCount += 1
-            xNT += 10
+            xNT += 12
             yNT = 308
         else:
             yNT -= 12
