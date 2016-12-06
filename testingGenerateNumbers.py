@@ -36,7 +36,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     extraTurtle.shape('turtle')
     extraTurtle.color('white')
     extraTurtle.penup()
-    extraTurtle.setpos(215,320)
+    extraTurtle.setpos(-70,320)
     extraTurtle.pendown()
     extraTurtle.write('Takes screenshot when over!', font = 'Arial 10 bold')
     extraTurtle.penup()
