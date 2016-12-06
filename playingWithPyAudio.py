@@ -3,6 +3,7 @@ import wave
 import time
 import random
 
+from multiprocessing import Process 
 
 def play(wave_filename):
     """
@@ -31,3 +32,7 @@ def play(wave_filename):
     wf.close()
 
     p.terminate()
+
+
+#play('zeroSounds/0.wav')
+

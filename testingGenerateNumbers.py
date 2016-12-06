@@ -173,6 +173,8 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     zeroRowCount = 1
 
     def writeSolutions(i,practiceList, color = 'red'):
+        index = random.randint(0,2)
+        play('zeroSounds/' + str(index) + '.wav')
         (xZero, yZero) = zeroTurtle.position()
         nonlocal zeroRowCount
         if(xZero >= 180):
@@ -234,13 +236,6 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
 
             color = random.choice(numberColors[practiceList[i]])
             turtle.color(color)
-
-            # if(practiceList[i] == 0):
-            #     thread1  = play('newSounds/bass.wav')
-            # elif(practiceList[i] % 2 == 0):
-            #     thread2 = play('newSounds/mix.wav')
-            # else:
-            #     thread3 = play('newSounds/piano.wav')
 
             turtle.penup()
             turtle.setpos(startPosition[0], startPosition[1])
@@ -315,5 +310,5 @@ def drawNumbers(drawingList):
 #  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
-#draw([0]*1000)
+#draw([0]*100)
 #draw(list(range(10)))
