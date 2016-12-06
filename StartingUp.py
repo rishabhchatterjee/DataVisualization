@@ -228,7 +228,8 @@ def redrawAll(canvas, data):
     free and let your imagination flow!
 
     NOTE: The program will automatically take a Screenshot of what you have visualized
-    save it to the current folder (directory) you are in!
+    save it to the current folder (directory) you are in! Also, it will make a sound
+    whenerver a solution / zero is encountered!
     '''
     if(data.mode == 'help'):
         canvas.create_text(data.width//2, data.height//6, text = "HELP MODE", font = "Arial 20 bold underline", fill ='red')
@@ -247,7 +248,9 @@ def redrawAll(canvas, data):
 
     Using the drawing algorithm, three types of  networks are made - one is a line 
     gradient, second is a circular network, and third is a scatterplot - all on the 
-    same page, simultaneously.
+    same page, simultaneously. Along with this, it makes a sound whenever a solution
+    or zero is encountered (as depending on the mode) and prints out the solution
+    or the index value of the zero.
     '''
     if(data.mode == 'aboutUs'):
         canvas.create_text(data.width//2, data.height//6, text = "ABOUT US", font = "Arial 20 bold underline", fill ='red')
