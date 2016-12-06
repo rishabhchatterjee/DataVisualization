@@ -171,6 +171,8 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     shifted = False
     zeroSwapped = False
     zeroRowCount = 1
+    (xTemp, yTemp) = zeroTurtle.position()
+    zeroTurtle.setpos(-230, yTemp)
 
     def writeSolutions(i,practiceList, color = 'red'):
         index = random.randint(0,4)
@@ -179,18 +181,18 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
         nonlocal zeroRowCount
         if(xZero >= 180):
             yZero -= 12
-            xZero = -245
+            xZero = -265
             zeroRowCount += 1
         nonlocal zeroSwapped
         if not zeroSwapped:
             if(yZero <= 260):
                 yZero = -276
-                xZero = -245
+                xZero = -265
                 zeroSwapped = True
         if(zeroRowCount < 8):
             zeroTurtle.color(color)
             zeroTurtle.write(str(i), font = 'Arial 15 bold')
-            xZero += 25
+            xZero += 35
             zeroTurtle.penup()
             zeroTurtle.setpos(xZero,yZero)
             zeroTurtle.pendown()
@@ -210,7 +212,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
 
         if(yNT <= -308):
             colCount += 1
-            xNT += 12
+            xNT += 10
             yNT = 308
         else:
             yNT -= 12
@@ -310,5 +312,5 @@ def drawNumbers(drawingList):
 #  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
-#draw([0]*100)
+draw([0]*100)
 #draw(list(range(10)))
