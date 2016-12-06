@@ -36,7 +36,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     extraTurtle.shape('turtle')
     extraTurtle.color('white')
     extraTurtle.penup()
-    extraTurtle.setpos(210,310)
+    extraTurtle.setpos(215,320)
     extraTurtle.pendown()
     extraTurtle.write('Takes screenshot when over!', font = 'Arial 10 bold')
     extraTurtle.penup()
@@ -161,15 +161,16 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
         yFactor = random.uniform(1.2,1.3)
         return (x*xFactor, y*yFactor)
 
-    kosbie.speed(15)
-    turtle.speed(15)
-    numberTurtle.speed(15)
-    extraTurtle.speed(15)
+    kosbie.speed(12)
+    turtle.speed(12)
+    turtle.pensize(1)
+    numberTurtle.speed(12)
+    extraTurtle.speed(12)
 
     colCount = 0
     shifted = False
     zeroSwapped = False
-    zeroRowCount = 0
+    zeroRowCount = 1
 
     def writeSolutions(i,practiceList, color = 'red'):
         (xZero, yZero) = zeroTurtle.position()
@@ -180,7 +181,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
             zeroRowCount += 1
         nonlocal zeroSwapped
         if not zeroSwapped:
-            if(yZero <= 255):
+            if(yZero <= 260):
                 yZero = -276
                 xZero = -245
                 zeroSwapped = True
@@ -219,6 +220,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
         numberTurtle.write(str(practiceList[i]), font = 'Arial 15 bold')
 
     def drawLines(practiceList, startPosition, i = 0):
+        turtle.showturtle()
         if(i == len(practiceList) - 1):
             return
         else:
@@ -260,8 +262,12 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
                     writeSolutions(i,practiceList,color)
             
             distance = ((xStartCenterMid - xEndCenterMid)**2 + (yStartCenterMid - yEndCenterMid)**2)**0.5
+            
+            turtle.pensize(1)
             turtle.goto(xStartCenterMid, yStartCenterMid)
+            turtle.pensize(2)
             turtle.goto(xEndCenterMid, yEndCenterMid)
+            turtle.pensize(1)
             turtle.goto(endPosition[0], endPosition[1])
 
             startPosition = endPosition
@@ -309,5 +315,5 @@ def drawNumbers(drawingList):
 #  3, 9, 0, 5, 7, 6, 8, 5, 7, 8, 8, 7, 9, 3, 4, 7, 3, 8, 7, 2, 2, 1, 9, 5, 1, 9, 
 #  1, 3, 1, 4, 6, 9, 7, 0, 3, 1, 9, 1, 9, 3, 8, 9, 3, 5, 2, 0, 0, 8, 2, 7, 8, 4,
 #   8])
-#draw([0]*500)
+#draw([0]*1000)
 #draw(list(range(10)))
