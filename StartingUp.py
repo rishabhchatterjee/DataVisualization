@@ -40,9 +40,9 @@ def mousePressed(event, data):
         if(data.width//2 - 300 <= x <= data.width//2 -25 and data.height//2 + 30 <= y <= data.height//2 + 90):
             data.mode = 'pi'
         if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 + 30 <= y <= data.height//2 + 90):
-            data.mode = 'freeDraw'
-        if(data.width//2 - 162.5 <= x <= data.width//2 + 112.5 and data.height//2 + 130 <= y <= data.height//2 + 190):
             data.mode = 'qnaryNumbers'
+        if(data.width//2 - 162.5 <= x <= data.width//2 + 112.5 and data.height//2 + 130 <= y <= data.height//2 + 190):
+            data.mode = 'freeDraw'
 
     if(data.mode == 'functions'):
         if(data.functionsPageLoaded == True):
@@ -153,10 +153,10 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2 - 170, data.height//2 + 60, text = "PI <3", font = "Arial 20 bold", fill = 'red')
 
         canvas.create_rectangle(data.width//2 + 25, data.height//2 + 30, data.width//2 + 300, data.height//2 + 90)
-        canvas.create_text(data.width//2 + 170, data.height//2 + 60, text = "Scratchpad", font = "Arial 20 bold", fill = 'red')
+        canvas.create_text(data.width//2 + 170, data.height//2 + 60, text = "Qnary Expansions", font = "Arial 20 bold", fill = 'red')
 
         canvas.create_rectangle(data.width//2 - 162.5, data.height//2 + 130, data.width//2 + 112.5, data.height//2 + 190)
-        canvas.create_text(data.width//2 - 20, data.height//2 + 160, text = "Qnary Expansions", font = "Arial 20 bold", fill = 'red')
+        canvas.create_text(data.width//2 - 20, data.height//2 + 160, text = "Scratchpad", font = "Arial 20 bold", fill = 'red')
 
         help()
         aboutUs()
@@ -220,7 +220,7 @@ def redrawAll(canvas, data):
 
     if(data.mode == 'qnaryNumbers'):
         canvas.create_image(400,400, image = data.qnaryBackground)
-        canvas.create_text(data.width//2, 200, text = "Click the hands to start!",font= 'Arial 20 bold', fill = 'red' )
+        canvas.create_text(data.width//2, 200, text = "Qnary Expansions",font= 'Arial 20 bold', fill = 'red' )
         help()
         aboutUs()
 
@@ -243,11 +243,11 @@ def redrawAll(canvas, data):
     which works on the same principle as recursive division for fractions. You will be 
     prompted to input number of digits after decimal point to calculate till.
 
-    Fourth, Scratchpad. This mode allows you to draw whatever you want! Feel
-    free and let your imagination flow!
-
-    Fifth, Qnery Expansions. This mode allows you to input any number and any
+    Fourth, Qnery Expansions. This mode allows you to input any number and any
     base and converts the number to the form in that base!
+
+    Fifth, Scratchpad. This mode allows you to draw whatever you want! Feel
+    free and let your imagination flow!
 
     NOTE: The program will automatically take a Screenshot of what you have visualized
     save it to the current folder (directory) you are in! Also, it will make a sound
