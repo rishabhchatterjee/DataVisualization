@@ -105,6 +105,7 @@ class Equation(object):
             return []
         else:
             val = f(count)
+            val = abs(val)
             if(mode == 'n'):                    # in normal mode append the 
                 if(val >= 10):                  # value digit by digit
                     temp = []

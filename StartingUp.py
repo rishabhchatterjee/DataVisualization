@@ -2,6 +2,7 @@ from functionsNormal import functionsNormal
 from fractions import *
 from piDigits import *
 from testFreeDrawing import *
+from qneryExpansions import *
 from testingGenerateNumbers import *
 from tkinter import *
 from tkinter import simpledialog
@@ -16,6 +17,7 @@ def init(data):
     data.functionsBackground = PhotoImage(file = 'images/Functions.gif')
     data.fractionsBackground = PhotoImage(file = 'images/f.gif')
     data.piBackground = PhotoImage(file = 'images/PI.gif')
+    data.qnaryBackground = PhotoImage(file = 'images/binary.gif')
     data.functionsPageLoaded = False
 
 def mousePressed(event, data):
@@ -31,14 +33,16 @@ def mousePressed(event, data):
         data.mode = 'aboutUs'
 
     if(data.mode == 'splashScreen'):
-        if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 10 <= y <= data.height//2 + 50):
+        if(data.width//2 - 300 <= x <= data.width//2 - 25 and data.height//2 - 80 <= y <= data.height//2 - 20):
             data.mode = 'functions'
-        if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 10 <= y <= data.height//2 + 50):
+        if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 - 80 <= y <= data.height//2 - 20):
             data.mode = 'fractions'
-        if(data.width//2 - 300 <= x <= data.width//2 -25 and data.height//2 + 100 <= y <= data.height//2 + 160):
+        if(data.width//2 - 300 <= x <= data.width//2 -25 and data.height//2 + 30 <= y <= data.height//2 + 90):
             data.mode = 'pi'
-        if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 + 100 <= y <= data.height//2 + 160):
+        if(data.width//2 + 25 <= x <= data.width//2 + 300 and data.height//2 + 30 <= y <= data.height//2 + 90):
             data.mode = 'freeDraw'
+        if(data.width//2 - 162.5 <= x <= data.width//2 + 112.5 and data.height//2 + 130 <= y <= data.height//2 + 190):
+            data.mode = 'qnaryNumbers'
 
     if(data.mode == 'functions'):
         if(data.functionsPageLoaded == True):
@@ -66,6 +70,11 @@ def mousePressed(event, data):
     if(data.mode == 'freeDraw'):
         if(data.width//2 - 137.5 <= x <= data.width//2 + 137.5 and data.height//2 - 30 <= y <= data.height//2 + 30):
             freeDraw()
+
+    if(data.mode == 'qnaryNumbers'):
+        if( 100 <= x <= 700 and 250 <= y <= 550):
+            drawingList = getNumberBase()
+            draw(drawingList)
         
 # keyPressed is for debugging purposes but works too
 
@@ -134,17 +143,20 @@ def redrawAll(canvas, data):
                                 text = "Welcome to Data Visualization",
                                     font = "Arial 26 bold")
 
-        canvas.create_rectangle(data.width//2 - 300, data.height//2 - 10, data.width//2 - 25, data.height//2 + 50)
-        canvas.create_text(data.width//2 - 170, data.height//2 + 20, text = "Functions", font = "Arial 20 bold", fill = 'red')
+        canvas.create_rectangle(data.width//2 - 300, data.height//2 - 80, data.width//2 - 25, data.height//2 - 20)
+        canvas.create_text(data.width//2 - 170, data.height//2 - 50, text = "Functions", font = "Arial 20 bold", fill = 'red')
 
-        canvas.create_rectangle(data.width//2 + 25, data.height//2 - 10, data.width//2 + 300, data.height//2 + 50)
-        canvas.create_text(data.width//2 + 170, data.height//2 + 20, text = "Fractions", font = "Arial 20 bold", fill = 'red')
+        canvas.create_rectangle(data.width//2 + 25, data.height//2 - 80, data.width//2 + 300, data.height//2 - 20)
+        canvas.create_text(data.width//2 + 170, data.height//2 - 50, text = "Fractions", font = "Arial 20 bold", fill = 'red')
 
-        canvas.create_rectangle(data.width//2 - 300, data.height//2 + 100, data.width//2 -25, data.height//2 + 160)
-        canvas.create_text(data.width//2 - 170, data.height//2 + 130, text = "PI <3", font = "Arial 20 bold", fill = 'red')
+        canvas.create_rectangle(data.width//2 - 300, data.height//2 + 30, data.width//2 -25, data.height//2 + 90)
+        canvas.create_text(data.width//2 - 170, data.height//2 + 60, text = "PI <3", font = "Arial 20 bold", fill = 'red')
 
-        canvas.create_rectangle(data.width//2 + 25, data.height//2 + 100, data.width//2 + 300, data.height//2 + 160)
-        canvas.create_text(data.width//2 + 170, data.height//2 + 130, text = "Free Style", font = "Arial 20 bold", fill = 'red')
+        canvas.create_rectangle(data.width//2 + 25, data.height//2 + 30, data.width//2 + 300, data.height//2 + 90)
+        canvas.create_text(data.width//2 + 170, data.height//2 + 60, text = "Scratchpad", font = "Arial 20 bold", fill = 'red')
+
+        canvas.create_rectangle(data.width//2 - 162.5, data.height//2 + 130, data.width//2 + 112.5, data.height//2 + 190)
+        canvas.create_text(data.width//2 - 20, data.height//2 + 160, text = "Qnary Expansions", font = "Arial 20 bold", fill = 'red')
 
         help()
         aboutUs()
@@ -201,13 +213,19 @@ def redrawAll(canvas, data):
     
     if(data.mode == 'freeDraw'):
         canvas.create_rectangle(data.width//2 - 137.5, data.height//2 - 30, data.width//2 + 137.5, data.height//2 + 30)
-        canvas.create_text(data.width//2, data.height//2, text = "Free Style Drawing",
+        canvas.create_text(data.width//2, data.height//2, text = "Scratchpad",
                                     font = 'Arial 20 bold', fill = 'red')
         help()
         aboutUs()
 
+    if(data.mode == 'qnaryNumbers'):
+        canvas.create_image(400,400, image = data.qnaryBackground)
+        canvas.create_text(data.width//2, 200, text = "Click the hands to start!",font= 'Arial 20 bold', fill = 'red' )
+        help()
+        aboutUs()
+
     text = '''\
-    Welcome to Data Visualization! This program has 4 modes as shown below.
+    Welcome to Data Visualization! This program has 5 modes as shown below.
 
     First, Functions mode. Functions mode has two sub-modes, Normal and Modular Arithemtic 
     Mode as explained on the Functions page.This mode evaluates a function in the given range 
@@ -225,8 +243,11 @@ def redrawAll(canvas, data):
     which works on the same principle as recursive division for fractions. You will be 
     prompted to input number of digits after decimal point to calculate till.
 
-    Fourth, Free Drawing Mode. This mode allows you to draw whatever you want! Feel
+    Fourth, Scratchpad. This mode allows you to draw whatever you want! Feel
     free and let your imagination flow!
+
+    Fifth, Qnery Expansions. This mode allows you to input any number and any
+    base and converts the number to the form in that base!
 
     NOTE: The program will automatically take a Screenshot of what you have visualized
     save it to the current folder (directory) you are in! Also, it will make a sound
@@ -239,7 +260,7 @@ def redrawAll(canvas, data):
         aboutUs()
 
     aboutUsText = '''\
-    Numbers are beautiful. However, their beuaty is hidden in their 'raw' form. When we 
+    Numbers are beautiful. However, their beauty is hidden in their 'raw' form. When we 
     see them as simple digits, we cannot understand their potential - what they can represent. 
 
     This program helps us do two things, first visualize the numbers, and second see 

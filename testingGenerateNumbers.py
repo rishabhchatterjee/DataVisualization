@@ -270,5 +270,6 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     turtle.onclick(takeScreenshot())             # takes automatic screenshot
     turtle.exitonclick()
     turtle.done()
+    #turtle.bye()
 
 #draw(list(range(10)))
