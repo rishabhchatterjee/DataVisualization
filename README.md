@@ -1,14 +1,18 @@
 # DataVisualization
 
-# Proposal
+Numbers are beautiful. However, their beuaty is hidden in their 'raw' form. When we 
+see them as simple digits, we cannot understand their potential - what they can represent. 
 
-Using turtle graphics, I wish to create a data visualization engine for rational and irrational numbers (like pi) as well as functions. I will visualize each digit of the real number using recursive division (as well as Chudnovsky's Alg for pi for extra precision since my recursive division gives precision upto 10^-7, 7th digit after decimal point) using a circular network, scatterplot, and gradient. The circle will have 10 parts, each part being a digit from 0-9 and color coded. As the digits are being calculated via recursive division, a network will be drawn from one digit to the next and so on. For functions I have two intentions -- first plotting digit by digit and second using Modular Arithemetic mod 10 to get the one's digit and plotting that (left to the choice of the user). This will yield a complex web of connections which looks really pretty. While the lines are being drawn there will also be a tone that is played (each digit having a distinct sound) as to create music with numbers. This will add a new dimension to 'visualizing' data. 
+This program helps us do two things, first visualize the numbers, and second see 
+the beauty of numbers. It uses modular arithmetic (if mode is selected) and recursive
+division and drawing to make a network representing how functions, rational, and 
+irrational numbers behave with time. 
 
-The program also makes a sound wheenever it encounters an integer solution to the function or a 0 in the decimal expansion and displays the solution/index value of the zero. 
-
-The visualization is three parts -- a gradient, scatterplot, and a network.
-
-This product can be used to teach people. Firstly, it is user-friendly since it creates art from numbers. This will make people love numbers instead of fearing them. Secondly, it is really helpful for those who prefer a visual learning method. 
+Using the drawing algorithm, three types of  networks are made - one is a line 
+gradient, second is a circular network, and third is a scatterplot - all on the 
+same page, simultaneously. Along with this, it makes a sound whenever a solution
+or zero is encountered (as depending on the mode) and prints out the solution
+or the index value of the zero.
 
 # Modules
 
@@ -16,6 +20,18 @@ Modules I will be using are :
 1) Turtle
 2) PyAudio
 3) Tkinter
+
+How to Download :
+1) Turtle
+    - Comes installed with Python
+2) PyAudio
+    - Open Terminal
+    - run the following commands    pip3 install pyaudio                (Mac)
+                                    python -m pip install pyaudio       (Windows)
+3) Tkinter
+    - Comes installed with python
+
+    NOTE : use python3 (3.5x)
 
 # Competitive Analysis
 
