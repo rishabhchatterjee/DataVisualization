@@ -101,12 +101,12 @@ class Equation(object):
 
     def findValuesFunctions(self, f, digits = 10, mode = 'n', count = 0, ans = []):
         global solutions
-        if(count >= int(digits)):
+        if(count >= int(digits)):           
             return []
         else:
             val = f(count)
-            if(mode == 'n'):  
-                if(val >= 10):
+            if(mode == 'n'):                    # in normal mode append the 
+                if(val >= 10):                  # value digit by digit
                     temp = []
                     n = val
                     while(n):
@@ -116,15 +116,16 @@ class Equation(object):
                     for digit in temp:
                         ans.append(digit)
                 else:
-                    if(val == 0):
+                    if(val == 0):               # keeps track of int
                         solutions.add(count)
                     ans.append(val)
-            else:
+            else:                               # appends val (mod 10)
                 ans.append(val%10)
 
-            return ans + self.findValuesFunctions(f, digits, self.mode, count + 1, ans = [])
+            return ans + self.findValuesFunctions(f, digits, self.mode, count + 1, ans = []) 
+                                                # recursive call
 
-    def makeFunction(self):
+    def makeFunction(self):                     # returns list with values
         if(self.degree == 1):
             def f(x):
                 return self.a*x + self.constant
@@ -165,6 +166,3 @@ class Equation(object):
             def f(x):
                 return self.a*x**10 + self.b*x**9 + self.c*x**8 + self.d*x**7 + self.e*x**6 + self.f*x**5 + self.g*x**4 + self.h*3 + self.i*x**2 + self.j*x + self.constant
             return callWithLargeStack(self.findValuesFunctions,f, self.digits,self.mode, 0, [])
-
-
-
