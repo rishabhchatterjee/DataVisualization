@@ -5,18 +5,24 @@ from decimal import Decimal, getcontext
 from tkinter import simpledialog
 
 def piDigitsList(mode = 'r'):
-    digits = int(simpledialog.askstring(" ", "Enter number of decimal places"))
-    #digits = int(input("Enter number of decimal places\n"))
+    digits = simpledialog.askstring(" ", "Enter number of decimal places")
+    for digit in digits:
+        if digit not in '0123456789':
+            digits = (simpledialog.askstring(" ", "Enter valid integer please!"))
+    digits = int(digits)
+    if(digits == 0):
+        digits = int(simpledialog.askstring(" ", "Enter non zero integer please!"))
+    
     if(mode == 'r'):
-        ans = callWithLargeStack(division, 355, 113, digits)
-        print(ans)
+        ans = callWithLargeStack(division, 355, 113, digits) 
+        print(ans)                                   # closest est to Pi
         return ans
 
     if(mode == 'c'):
-
+        # Chudnovsky Algorithm, adapted from
+        # http://stackoverflow.com/questions/28284996/python-pi-calculation
         getcontext().prec=digits
-
-        def piChudnovskyAlg(n): #Chudnovsky algorithm
+        def piChudnovskyAlg(n):         
             t = Decimal(0)
             pi = Decimal(0)
             deno = Decimal(0)
@@ -29,9 +35,10 @@ def piDigitsList(mode = 'r'):
             pi = 1/pi
             return pi
 
-        def getPiChudnovskyAlg(n):
-            pi = str(n)
-            piDigitList = []
+        # code below is NOT ADAPTED
+        def getPiChudnovskyAlg(n):          
+            pi = str(n)                     # converts big int to str to add
+            piDigitList = []                # to list 
             for digit in pi:
                 if digit != '.':
                     piDigitList.append(int(digit))
@@ -40,4 +47,3 @@ def piDigitsList(mode = 'r'):
         print(ans)
         return ans
 
-#print(piDigitsList('c'))
