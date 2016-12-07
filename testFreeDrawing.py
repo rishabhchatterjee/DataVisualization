@@ -30,7 +30,7 @@ def freeDraw():
         turtle.penup()
         turtle.setpos(0,0)
 
-    def mouseClick(event):
+    def mousePressed(event):
         turtle.penup()
         turtle.goto(event.x-360,340-event.y)
         turtle.pendown()
@@ -38,10 +38,10 @@ def freeDraw():
     def draw(event):
         turtle.goto(event.x-360,340-event.y)
 
-    def release(event):
+    def mouseReleased(event):
         turtle.penup()
 
-    def reset(event):
+    def clearScreen(event):
         turtle.clear()
         setup()
 
@@ -66,21 +66,20 @@ def freeDraw():
     turtle.reset()
     turtle.speed(0)
 
-    c=turtle.getcanvas()
-
+    canvas=turtle.getcanvas()
     setup()
-    c.bind("<Button-1>", mouseClick)
-    c.bind("<B1-Motion>", draw)
-    c.bind("<ButtonRelease-1>", release)
-    c.bind("<Escape>",reset)
-    c.bind("<c>", changeColor)
-    c.bind("<e>", eraser)
-    c.bind("<d>", changeColor)
-    c.bind("<s>", screenshot)
 
-
-    s=turtle.Screen()
-    s.title('FREE STYLE DRAWING')
-    s.listen()
+    canvas.bind("<Button-1>", mousePressed)
+    canvas.bind("<B1-Motion>", draw)
+    canvas.bind("<ButtonRelease-1>", mouseReleased)
+    canvas.bind("<Escape>",clearScreen)
+    canvas.bind("<c>", changeColor)
+    canvas.bind("<e>", eraser)
+    canvas.bind("<d>", changeColor)
+    canvas.bind("<s>", screenshot)
+    
+    screen=turtle.Screen()
+    screen.title('FREE STYLE DRAWING')
+    screen.listen()
 
 #freeDraw()
