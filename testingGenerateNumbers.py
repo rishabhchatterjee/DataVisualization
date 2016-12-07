@@ -224,7 +224,7 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
 
     def drawLines(practiceList, startPosition, i = 0):
         turtle.showturtle()
-        if(i == len(practiceList) - 1):         
+        if(i == len(practiceList)):         
             return
         else:
             endPosition = getPosition(practiceList[i])
@@ -271,4 +271,4 @@ def draw(drawingList, mode = 'NotFunctionNormal'):
     turtle.exitonclick()
     turtle.done()
 
-#draw(list(range(20)))
+#draw(list(range(10)))
