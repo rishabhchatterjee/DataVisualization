@@ -8,9 +8,8 @@ from tkinter import simpledialog
 import turtle
 from testingScreenshot import takeScreenshot
 
-####################################
-# customize these functions
-####################################
+## Template adapted from barebones.py on course website ##
+
 def init(data):
     data.mode = 'splashScreen'
     data.background = PhotoImage(file = 'images/mathstats.gif')
@@ -68,6 +67,7 @@ def mousePressed(event, data):
         if(data.width//2 - 137.5 <= x <= data.width//2 + 137.5 and data.height//2 - 30 <= y <= data.height//2 + 30):
             freeDraw()
         
+# keyPressed is for debugging purposes but works too
 
 def keyPressed(event, data):
     if(event.keysym == 'h'):
@@ -164,11 +164,12 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2, data.height - 250, 
             text = 'Normal Mode : In this mode the values of the function \nis evaluated and each digit (if value >= 10) is visualized\n',
                 font = 'Arial 20 bold', fill = 'blue')
+        
         canvas.create_text(data.width//2, data.height - 200, 
             text = 'Modular Arithemtic Mode : In this mode the values of the function \nis evaluated and the one\'s digit (found by mod 10) is visualized',
                 font = 'Arial 20 bold', fill = 'blue')
         help()
-        
+        aboutUs()
         data.functionsPageLoaded = True
 
     if(data.mode == 'fractions'):
@@ -265,7 +266,7 @@ def redrawAll(canvas, data):
 # use the run function as-is
 ####################################
 
-def run(width=300, height=300):                 # adapted from course notes
+def DataVisualization(width=300, height=300):                 
     def redrawAllWrapper(canvas, data):
         canvas.delete(ALL)
         canvas.create_rectangle(0, 0, data.width, data.height,
@@ -309,4 +310,4 @@ def run(width=300, height=300):                 # adapted from course notes
     root.mainloop()  # blocks until window is closed
     print("Thank You!")
 
-run(800, 800)
+DataVisualization(800, 800)
