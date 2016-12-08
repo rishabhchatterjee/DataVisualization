@@ -20,6 +20,7 @@ Modules I will be using are :
 1) Turtle
 2) PyAudio
 3) Tkinter
+4) pyscreenshot
 
 How to Download :
 1) Turtle
@@ -32,6 +33,10 @@ How to Download :
     - Comes installed with python
 
     NOTE : use python3 (3.5x)
+4) pyscreenshot
+    - Open Terminal
+    - run pip3 install pyscreenshot (Mac)
+NOTE : Windows users have equivalent software called Pillow in which case just change import pyscreenshot to import PIL in the files
 
 # Competitive Analysis
 
