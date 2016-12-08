@@ -39,7 +39,7 @@ def getNumberBase():
    
     n = int(n)
 
-    base = simpledialog.askstring(" ", "Input integer base")
+    base = simpledialog.askstring(" ", "Input integer base <= 10")
     for digit in base:
         if(digit not in '0123456789'):
             base = simpledialog.askstring(" ", "Please enter valid base!")

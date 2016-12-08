@@ -19,6 +19,7 @@ def init(data):
     data.piBackground = PhotoImage(file = 'images/PI.gif')
     data.qnaryBackground = PhotoImage(file = 'images/binary.gif')
     data.functionsPageLoaded = False
+    data.qnaryLoaded = False
 
 def mousePressed(event, data):
     (x,y) = (event.x, event.y)
@@ -72,9 +73,10 @@ def mousePressed(event, data):
             freeDraw()
 
     if(data.mode == 'qnaryNumbers'):
-        if( 100 <= x <= 700 and 250 <= y <= 550):
-            drawingList = getNumberBase()
-            draw(drawingList)
+        if(data.qnaryLoaded):
+            if( 100 <= x <= 700 and 250 <= y <= 550):
+                drawingList = getNumberBase()
+                draw(drawingList)
         
 # keyPressed is for debugging purposes but works too
 
@@ -223,6 +225,7 @@ def redrawAll(canvas, data):
         canvas.create_text(data.width//2, 200, text = "Qnary Expansions",font= 'Arial 20 bold', fill = 'red' )
         help()
         aboutUs()
+        data.qnaryLoaded = True
 
     text = '''\
     Welcome to Data Visualization! This program has 5 modes as shown below.
