@@ -36,7 +36,7 @@ How to Download :
 4) pyscreenshot
     - Open Terminal
     - run pip3 install pyscreenshot (Mac)
-NOTE : Windows users have equivalent software called Pillow in which case just change import pyscreenshot to import PIL in the files
+NOTE : Windows users have equivalent software called Pillow in which case just change import pyscreenshot to import PIL in the files (http://www.pythonware.com/products/pil/)
 
 # Competitive Analysis
 
